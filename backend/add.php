@@ -1,6 +1,7 @@
 <?php
 	require_once("../resources/connection.php");
 	require_once("../resources/functions.php");
+	require_once("../resources/objects.php");
 	
 	session_start();
 	if(!isset($_SESSION['user'])){
@@ -42,7 +43,11 @@
 		if(!$valid){
 			$error .= " Error";
 		}else{		
-			//Insert Work	
+			$newWork = new Work();
+			$newWork -> setProperty("name", $name); 
+			$newWork -> thumbnail = $thumbnail;
+			var_dump($newWork);
+			/*//Insert Work	
 			$addQuery = "INSERT INTO work (name, description, thumbnail, user_id, goody, date, order_value)
 						  VALUES ('$name', '$description', '$thumbnail', '$user', '$goody', '$date', '$order')";
 			$results = mysql_query($addQuery);
@@ -63,6 +68,7 @@
 				$imageQuery = "INSERT INTO images (image_file, work_id)
 								VALUES ('$image', '$workId')";
 				mysql_query($imageQuery);
+			
 			}
 			
 			//Process JSON
@@ -86,7 +92,8 @@
 			}
 						
 			header("Location: overview.php");
-		}
+		*/}
+		
 	}
 
 ?>

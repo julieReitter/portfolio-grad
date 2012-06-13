@@ -1,1 +1,19 @@
-{"1":[{"45":["4","Localytics","msca_sitethumbl.jpg",["HTML","HTML5","CSS","CSS3"]]}],"2":[{"45":["4","Localytics","msca_sitethumbl.jpg",["HTML","HTML5","CSS","CSS3"]]}],"3":[{"45":["4","Localytics","msca_sitethumbl.jpg",["HTML","HTML5","CSS","CSS3"]]}],"4":[{"45":["4","Localytics","msca_sitethumbl.jpg",["HTML","HTML5","CSS","CSS3"]]}]}
+/*
+SKILL SEARCH JSON
+This json file lists the work items based on 
+skill id for the home thumbnails to aid in 
+quick search functionality. 
+*/
+{
+	"1": {[]},
+	"2": {[]},
+	"3": {[]},
+	"4": {[]},
+	"5": {[]},
+	"6": {[]},
+	"7": {[]},
+	"8": {[]},
+	"9": {[]},
+	"10":{[]},
+	"11":{[]}   
+}    
