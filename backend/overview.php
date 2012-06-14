@@ -8,7 +8,7 @@
 	
 	$user = $_SESSION['user'];
 	
-	$query_work = "SELECT * FROM work WHERE user_id='$user' ORDER BY date DESC";
+	$query_work = "SELECT * FROM work ORDER BY date DESC";
 	$work_results = mysql_query($query_work); 
 ?>
 <!DOCTYPE html>

@@ -42,14 +42,14 @@ function uploadImage($name, $path){
 		
 		if($uploadError == true){
 			move_uploaded_file($_FILES[$name]['tmp_name'][$i], $path . $_FILES[$name]["name"][$i]);
-			echo "Upload Successfull";
+			//echo "Upload Successfull";
 		}else{
-			echo "Upload Failed";
+			//echo "Upload Failed";
 		}
 	
 	}//end loop
 
-	
+	return $uploadError;
 }//close uploadImage
 
 ?>
