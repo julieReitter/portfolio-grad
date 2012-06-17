@@ -34,6 +34,8 @@ class Work{
 		if(!is_numeric($this->orderVal)) {$valid = false; $error = "order";}
 		
 		//validate - images (thumbs)
+		if(!validateImages('thumbnail')) $valid = false;;
+		if(!validateImages('images')) $valid = false;
 		
 		return $valid;	
 	}//close validate
@@ -41,68 +43,105 @@ class Work{
 	public function create() {
 		$names = explode(",", $this->skillNames);
 		
-		//Preparing data for queries
+		//Preparing string data for queries
 		$this->name = mysql_real_escape_string($this->name);
 		$this->description = mysql_real_escape_string($this->description);
 		
-		//Upload & Validate Images
-		$thumb = uploadImage('thumbnail', '../images/content/thumbnails/');
-		$imgs = uploadImage('images', '../images/content/');
+		//Upload Images
+		uploadImage('thumbnail', '../images/content/thumbnails/');
+		uploadImage('images', '../images/content/');
 		
-		if($thumb || $imgs){ 
-			//Insert Work	
-			$addQuery = "INSERT INTO work (name, description, thumbnail, goody, date, order_value)
-						  VALUES ('$this->name', 
-								  '$this->description', 
-								  '$this->thumbnail', 
-								  '$this->goody', 
-								  '$this->dateCreated', 
-								  '$this->orderVal')";
-			$results = mysql_query($addQuery);
-			
-			//Join Skill and Work 
-			$this->id = mysql_insert_id();
-			foreach($this->skills as $skill){
-				$q = "INSERT INTO work_skills VALUES ($this->id, $skill)";
-				mysql_query($q);
-				$this->skillTitles[] = $names[$skill-1];
-			}
-				
-			//Insert Images
-			foreach($this->images as $image){
-				$imageQuery = "INSERT INTO images (image_file, work_id)
-								VALUES ('$image', '$this->id')";
-				mysql_query($imageQuery);
-			}
-			
-			$this->createJson();
+		//Insert Work	
+		$addQuery = "INSERT INTO work (name, description, thumbnail, goody, date, order_value)
+					  VALUES ('$this->name', 
+							  '$this->description', 
+							  '$this->thumbnail', 
+							  '$this->goody', 
+							  '$this->dateCreated', 
+							  '$this->orderVal')";
+		$results = mysql_query($addQuery);
+		
+		//Join Skill and Work 
+		$this->id = mysql_insert_id();
+		foreach($this->skills as $skill){
+			$q = "INSERT INTO work_skills VALUES ($this->id, $skill)";
+			mysql_query($q);
+			$this->skillTitles[] = $names[$skill-1];
 		}
+			
+		//Insert Images
+		foreach($this->images as $image){
+			$imageQuery = "INSERT INTO images (image_file, work_id)
+							VALUES ('$image', '$this->id')";
+			mysql_query($imageQuery);
+		}
+		
+		$this->createJson();
 	
 	}//close create
+	
+	public function delete($id){
+		
+		$deleteWorkQuery = "DELETE FROM work WHERE work_id=$id";
+		mysql_query($deleteWorkQuery);	
+		$deleteWorkSkillsQuery = "DELETE FROM work_skills WHERE work_id=$id";
+		mysql_query($deleteWorkSkillsQuery);
+		
+		//Remove data from skills json
+		$jsonData = json_decode(file_get_contents('../js/skills.json'), true);
+		foreach($jsonData as $key=>$val){
+			unset($jsonData[$key]["$id"]);
+		}
+		file_put_contents("../js/skills.json", json_encode($jsonData));
+		
+		//Remove data from full work json
+		$workJsonData = json_decode(file_get_contents('../js/works.json'), true);
+		foreach($workJsonData as $key=>$val){
+			unset($workJsonData[$key]["$id"]);
+		}
+		file_put_contents("../js/works.json", json_encode($workJsonData));
+		
+		//Remove data goodies json
+		$goodiesJsonData = json_decode(file_get_contents('../js/goodies.json'), true);
+		foreach($goodiesJsonData as $key=>$val){
+			unset($goodiesJsonData[$key]["$id"]);
+		}
+		file_put_contents("../js/goodies.json", json_encode($goodiesJsonData));
+				
+	}
 	
 	public function createJson(){
 		if(!$this->goody){
 			//For work that is not a goody add to skills json
 			$jsonData = json_decode(file_get_contents('../js/skills.json'), true);
 			foreach($this->skills as $skill){
-				$jsonData[$skill][] = array($this->id => array( $this->orderVal, $this->name, $this->thumbnail, $this->skillTitles));
+				$jsonData[$skill][$this->id] = array( "order" => $this->orderVal, 
+													  "name" => $this->name, 
+													  "thumbnail" => $this->thumbnail, 
+													  "skills" => $this->skillTitles);
 			}
 			file_put_contents('../js/skills.json', json_encode($jsonData));
 			
 			//For work full details - not a goody - add to works json
 			$workJsonData = json_decode(file_get_contents('../js/works.json'), true);
-			$workJsonData[$this->id][] = array($this->name, $this->description, $this->images, $this->dateCreated, $this->orderVal);
+			$workJsonData[$this->id] = array("name" => $this->name, 
+											 "desc" => $this->description, 
+											 "images" => $this->images, 
+											 "date" => $this->dateCreated, 
+											 "order" => $this->orderVal);
 			file_put_contents('../js/works.json', json_encode($workJsonData));
 		
 		}else{
 			//For work that is a goody add to goodies json
 			$jsonData = json_decode(file_get_contents('../js/goodies.json'), true);
-			$jsonData[$this->id][] = array($this->name, $this->thumbnail, $this->description);
+			$jsonData[$this->id] = array("name" => $this->name, 
+										 "thumbnail" => $this->thumbnail, 
+										 "desc" => $this->description);
 			file_put_contents('../js/goodies.json', json_encode($jsonData));
 		}
 	}//close createJson
+	
 		
 }//close work
-
 
 ?>
