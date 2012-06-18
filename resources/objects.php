@@ -11,6 +11,7 @@ class Work{
 	public $goody = false;
 	public $dateCreated = '00/00/0000';
 	public $orderVal = NULL;
+	public $link = NULL;
 	public $images = array();
 	public $skills = array();
 	public $skillNames;
@@ -34,7 +35,7 @@ class Work{
 		if(!is_numeric($this->orderVal)) {$valid = false; $error = "order";}
 		
 		//validate - images (thumbs)
-		if(!validateImages('thumbnail')) $valid = false;;
+		if(!validateImages('thumbnail')) $valid = false;
 		if(!validateImages('images')) $valid = false;
 		
 		return $valid;	
@@ -46,19 +47,21 @@ class Work{
 		//Preparing string data for queries
 		$this->name = mysql_real_escape_string($this->name);
 		$this->description = mysql_real_escape_string($this->description);
+		$this->link = mysql_real_escape_string($this->link);
 		
 		//Upload Images
 		uploadImage('thumbnail', '../images/content/thumbnails/');
 		uploadImage('images', '../images/content/');
 		
 		//Insert Work	
-		$addQuery = "INSERT INTO work (name, description, thumbnail, goody, date, order_value)
+		$addQuery = "INSERT INTO work (name, description, thumbnail, goody, date, order_value, link)
 					  VALUES ('$this->name', 
 							  '$this->description', 
 							  '$this->thumbnail', 
 							  '$this->goody', 
 							  '$this->dateCreated', 
-							  '$this->orderVal')";
+							  '$this->orderVal',
+							  '$this->link')";
 		$results = mysql_query($addQuery);
 		
 		//Join Skill and Work 
@@ -128,7 +131,8 @@ class Work{
 											 "desc" => $this->description, 
 											 "images" => $this->images, 
 											 "date" => $this->dateCreated, 
-											 "order" => $this->orderVal);
+											 "order" => $this->orderVal,
+											 "link" => $this->link);
 			file_put_contents('../js/works.json', json_encode($workJsonData));
 		
 		}else{
@@ -136,7 +140,8 @@ class Work{
 			$jsonData = json_decode(file_get_contents('../js/goodies.json'), true);
 			$jsonData[$this->id] = array("name" => $this->name, 
 										 "thumbnail" => $this->thumbnail, 
-										 "desc" => $this->description);
+										 "desc" => $this->description,
+										 "link" => $this->link);
 			file_put_contents('../js/goodies.json', json_encode($jsonData));
 		}
 	}//close createJson

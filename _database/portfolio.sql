@@ -9,8 +9,8 @@ work_id INT PRIMARY KEY AUTO_INCREMENT,
 name VARCHAR(30) NOT NULL,
 description VARCHAR(50) NOT NULL,
 thumbnail VARCHAR(20) NOT NULL,
-user_id INT REFERENCES user(user_id)
-goody BOOLEAN
+goody BOOLEAN,
+link varchar(100)
 );
 
 CREATE TABLE skills (

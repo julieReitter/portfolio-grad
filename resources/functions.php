@@ -19,18 +19,22 @@ function validateDate ($dateStr){
 	return $date;
 }
 
-function validateImages($file){
+function validateImages($name){
 	$imageError = true;
-	$fileName = $_FILES[$file]["name"];
+	$fileName = $_FILES[$name]["name"];
 	
 	for($i=0; $i<count($fileName); $i++){
 		$fileType = $_FILES[$name]['type'][$i];
 		$fileError = $_FILES[$name]['error'][$i];
 		$fileSize = $_FILES[$name]['size'][$i];
 		
-		if($fileType != 'image/jpeg' || $fileType != 'image/png' || $fileSize > 2000000 || $fileError > 0){
-			$imageError = false;			
-		}
+		if($fileType == 'image/jpeg' || $fileType == 'image/png'){
+			if($fileSize > 2000000 || $fileError > 0){
+				$imageError = false;
+			}
+		}else{
+			$imageError = false;
+		}	
 	}
 	return $imageError;
 }
