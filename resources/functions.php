@@ -19,37 +19,34 @@ function validateDate ($dateStr){
 	return $date;
 }
 
-function uploadImage($name, $path){	
-	$uploadError = true; 
+function validateImages($name){
+	$imageError = true;
 	$fileName = $_FILES[$name]["name"];
 	
 	for($i=0; $i<count($fileName); $i++){
 		$fileType = $_FILES[$name]['type'][$i];
 		$fileError = $_FILES[$name]['error'][$i];
 		$fileSize = $_FILES[$name]['size'][$i];
-					
-		if($fileType == 'image/jpeg' || $fileType == 'image/png'){
-			if($fileSize < 	2000000){
-				if($fileError > 0){
-					$uploadError = false;
-				}//File Error
-			}else{
-				$uploadError = false;	
-			}// File Size
-		}else{
-			$uploadError = false;	
-		}//File Type
 		
-		if($uploadError == true){
-			move_uploaded_file($_FILES[$name]['tmp_name'][$i], $path . $_FILES[$name]["name"][$i]);
-			echo "Upload Successfull";
+		if($fileType == 'image/jpeg' || $fileType == 'image/png'){
+			if($fileSize > 2000000 || $fileError > 0){
+				$imageError = false;
+			}
 		}else{
-			echo "Upload Failed";
-		}
+			$imageError = false;
+		}	
+	}
+	return $imageError;
+}
+
+function uploadImage($name, $path){	
+
+	$fileName = $_FILES[$name]["name"];
 	
+	for($i=0; $i<count($fileName); $i++){
+		move_uploaded_file($_FILES[$name]['tmp_name'][$i], $path . $_FILES[$name]["name"][$i]);
 	}//end loop
 
-	
 }//close uploadImage
 
 ?>
