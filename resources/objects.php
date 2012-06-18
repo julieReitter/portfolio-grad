@@ -33,6 +33,7 @@ class Work{
 		if(empty($this->description)) {$valid = false; $error = "desc";}
 		if(empty($this->skills)) {$valid = false; $error = "skills";}
 		if(!is_numeric($this->orderVal)) {$valid = false; $error = "order";}
+		if($this->link != NULL && !filter_var($this->link, FILTER_VALIDATE_URL)) {$valid = false; $error = "link";}
 		
 		//validate - images (thumbs)
 		if(!validateImages('thumbnail')) $valid = false;

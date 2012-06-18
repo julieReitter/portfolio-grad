@@ -25,6 +25,7 @@
 		if(isset($_POST['skills'])) $work -> setProperty("skills", $_POST['skills']);
 		$work -> setProperty("skillNames", $_POST['stitles']);
 		$work -> setProperty("orderVal", $_POST['order']);
+		if(!empty($_POST['link'])) $work -> setProperty('link', $_POST['link']);
 		isset($_POST['goody']) ? $work -> setProperty('goody',true) : $goody = false; 
 		empty($_FILES['thumbnail']) ? $valid = false : $work -> setProperty("thumbnail", $_FILES['thumbnail']['name'][0]); 
 		empty($_FILES['images']) ? $valid = false :  $work -> setProperty("images", $_FILES['images']['name']);
@@ -56,6 +57,7 @@
 			<input type="text" name="date" id="date" placeholder-"date" value="<?php if(isset($work)){ echo $work -> dateCreated; } else{ echo $today; }?>"/>
 			<input type="text" name="order" id="order" placeholder="Order" value="<?php if(isset($work)) echo $work -> orderVal;?>"/><br/>
 			<textarea name="description" id="description" placeholder="Description*"><?php if(isset($work)) echo $work -> description;?></textarea>
+			<input type="text" name="link" id="link" placeholder="Link" value="<?php if(isset($work)) echo $work -> link;?>"/>
 			<select name="skills[]" id="skills" multiple>
 				<?php if(!empty($skillsResult)) : ?>
 				<?php while( $row = mysql_fetch_assoc($skillsResult) ) : ?>
