@@ -1,5 +1,6 @@
 <?php
  	require_once("../resources/connection.php");
+	require_once("../resources/objects.php");
 	
 	session_start();
 	if(!isset($_SESSION['user'])){
@@ -8,7 +9,7 @@
 	
 	$user = $_SESSION['user'];
 	
-	$query_work = "SELECT * FROM work WHERE user_id='$user' ORDER BY date DESC";
+	$query_work = "SELECT * FROM work ORDER BY date DESC";
 	$work_results = mysql_query($query_work); 
 ?>
 <!DOCTYPE html>
@@ -37,7 +38,7 @@
 						<td><?php echo date('m/d/Y' , strtotime($row['date'])); ?></td>
 						<td><?php echo $row['name']; ?></td>
 						<td><a href="#" class="button edit">Edit</a></td>
-						<td><a href="#" class="button delete">Delete</a></td>
+						<td><a href="delete.php?delete=<?php echo $row['work_id'];?>" class="button delete">Delete</a></td>
 					</tr>
 				<?php endwhile;?>
 				<?php endif; ?>

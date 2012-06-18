@@ -11,7 +11,8 @@ SITE
 	 global.css.less
 	 
       /js
-	 ??
+	 validation.js
+	 ajax.js
 	 
       /images
 	 /content
@@ -22,12 +23,13 @@ SITE
 	 index.php
 	 overview.php
 	 add.php
+	 delete.php
       
       /resources
-	 config.php
 	 connection.php
 	 functions.php
-	 validation.php
+	 objects.php
+	 sendform.php
 	 
 	 /lib
 	    jquery.min.css
