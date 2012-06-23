@@ -11,17 +11,13 @@
 	
 	$query_work = "SELECT * FROM work ORDER BY date DESC";
 	$work_results = mysql_query($query_work); 
+
+	include('../header.php');
 ?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Julie Reitter Portfolio Backend</title>
-</head>
-<body>
 	<section id="content">
-		<h1>Julie Reitter</h1>
-		<a href="add.php" class="button add">Add New</a>
+		<h1 class="fl">Julie Reitter</h1>
+		<a href="add.php" class="button add fr">Add New</a>
+		<div class="clearfix"></div>
 		<table id="overview">
 			<thead>
 				<tr>
@@ -37,8 +33,8 @@
 					<tr>
 						<td><?php echo date('m/d/Y' , strtotime($row['date'])); ?></td>
 						<td><?php echo $row['name']; ?></td>
-						<td><a href="#" class="button edit">Edit</a></td>
-						<td><a href="delete.php?delete=<?php echo $row['work_id'];?>" class="button delete">Delete</a></td>
+						<td><a href="#" class="edit">Edit</a></td>
+						<td><a href="delete.php?delete=<?php echo $row['work_id'];?>" class="delete">Delete</a></td>
 					</tr>
 				<?php endwhile;?>
 				<?php endif; ?>

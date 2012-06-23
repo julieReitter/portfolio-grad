@@ -96,41 +96,72 @@ nav{
 
 #contact{
    .fl;
-   input[type="text"], textarea{
-      .user-input;
-      width: 450px;
-      display: block;
-      margin: 20px;
-      color: darken(@lightGray, 20%);
-      font-family: "Century Gothic", CenturyGothic, "Apple Gothic", Arial, sans-serif;
-   }
-   
-   textarea{
-      white-space: normal;
-      height: 175px;
-   }
-   
-   input[type="submit"]{
-      .gradient;
-      padding: 5px;
-      width: 477px;
-      margin: 10px 20px;
-      border: solid 1px darken(@blue, 20%);
-      border-radius: 20px;
-      box-shadow: inset 0 1px 1px lighten(@blue, 20%);
-      color: @white;
-      font-weight:bold;
-      font-size: 22px;
-      text-transform: lowercase;
-      font-family: "Century Gothic", CenturyGothic, "Apple Gothic", Arial, sans-serif;
-      text-shadow: 0 1px 2px darken(@blue, 20%);
-   }
-   
    margin-right: 20px;
 }
 
+.login{
+   .center(500px) !important;
+   margin-top: 80px !important;
+}
+
+input[type="text"], input[type="password"],
+textarea{
+   .user-input;
+   width: 450px;
+   display: block;
+   margin: 20px;
+   color: darken(@lightGray, 20%);
+   font-family: "Century Gothic", CenturyGothic, "Apple Gothic", Arial, sans-serif;
+}
+
+textarea{
+   white-space: normal;
+   height: 175px;
+}
+
+input[type="submit"], .button{
+   .gradient;
+   padding: 5px;
+   width: 477px;
+   margin: 10px 20px;
+   border: solid 1px darken(@blue, 20%);
+   border-radius: 20px;
+   box-shadow: inset 0 1px 1px lighten(@blue, 20%);
+   color: @white;
+   font-weight:bold;
+   font-size: 22px;
+   font-family: "Century Gothic", CenturyGothic, "Apple Gothic", Arial, sans-serif;
+   text-transform: lowercase;
+   text-align: center;
+   text-shadow: 0 1px 2px darken(@blue, 20%);
+}
+
+input[type="file"]{
+   padding: 10px 0 30px 0;
+}
+   
 .contact-contain{
    .center(750px) !important;
    margin-top: 50px !important;
 }
 
+#overview{
+   .center(960px);
+   background: @white;
+   border: solid 1px @lightGray;
+   .shadow;
+   margin-top: 20px !important;
+   
+   thead th{
+      text-align: left;
+      padding: 8px 10px;
+      text-transform: uppercase;
+      border-bottom: solid 1px @lightGray;
+   }
+   
+   td{
+      width: 250px;
+      padding: 8px 10px;
+      border-bottom: solid 1px @lightGray;
+   }
+}
