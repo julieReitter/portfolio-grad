@@ -8,7 +8,7 @@
 	<div class="clearfix"></div>
 	<select id="skills-select" multiple data-placeholder="Search a skill to view related work">
 	<?php
-		$querySkills = "SELECT * FROM skills";
+		$querySkills = "SELECT * FROM skills WHERE skill_title <> 'featured'";
 		$skillsResult = mysql_query($querySkills);
 		
 		while($row = mysql_fetch_array($skillsResult)){
@@ -20,10 +20,6 @@
 	</select>
 		
 	<div id="loader-section">
-		<div class="thumbnail">
-			<span class="hover-overlay"></span>
-			<img/>
-		</div>
 	</div>
 	
 </section><!--close content-->	

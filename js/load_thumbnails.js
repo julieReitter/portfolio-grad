@@ -2,10 +2,19 @@
 * Julie Reitter Portfolio 
 * Copyright 2012
 **************************************/
-
+var j;
 $(document).ready(function(){
 	//Get Featured Work, Any work where order < 8
-	
+	function loadFeaturedWork(){
+		var featuredWork = [];
+		$.getJSON('js/skills.json', function(json, skill){
+			//Assumes featured work is id - 0;
+			j = json;
+			console.log(json);
+		}).complete(function(){
+			populateThumbnails(featuredWork);
+		});
+	}
 	/***************************************
 	* On Search Change (Chosen Trigger) 
 	* clear #loader-section 
@@ -31,12 +40,14 @@ $(document).ready(function(){
 	
 	$("#skills-select").chosen().change(function(event){
 		var data = $("#skills-select").val();
-		if(data != null) 
+		if(data != null){ 
 			getWorkFromSkills(data);
+		}else{
+			loadFeaturedWork();	
+		}
 	});
 	
 	function populateThumbnails(selectedWork){
-		console.log("Loading");
 		var $loadSection = $("#loader-section"),
 			workHtml = '';		
 				
@@ -69,5 +80,14 @@ $(document).ready(function(){
 		$loadSection.html(workHtml);
 			
 	}
+	
+	//Onload triggers
+	loadFeaturedWork();
+	
+	/***********************************
+	* THUMBNAIL HOVER
+	************************************/
+	var $thumbnail = $("body").find(".thumbnail"),
+		$overlay = $thumbnail.find(".hover-overlay");
 	
 });

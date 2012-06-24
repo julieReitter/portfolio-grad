@@ -118,7 +118,7 @@ class Work{
 		if(!$this->goody){
 			//For work that is not a goody add to skills json
 			$jsonData = json_decode(file_get_contents('../js/skills.json'), true);
-			foreach($this->skills as $skill){
+			foreach($this->skillTitles as $skill){
 				$jsonData[$skill][$this->id] = array( "order" => $this->orderVal, 
 													  "name" => $this->name, 
 													  "thumbnail" => $this->thumbnail, 

@@ -72,8 +72,9 @@ nav{
    
    a{
       .link-block;
-      background-image: url(../images/layout/logo);
+      background-image: url(../images/layout/logo.png);
       background-repeat: no-repeat;
+      background-position: 0 -8px;
    }
 }
 
@@ -164,4 +165,41 @@ input[type="file"]{
       padding: 8px 10px;
       border-bottom: solid 1px @lightGray;
    }
+}
+
+.thumbnail{
+   .fl;
+   .shadow;
+   width: 200px;
+   height: 300px;
+   padding: 10px;
+   background: @white;
+   border: solid 1px @lightGray;
+   margin: 0 15px 30px 15px;
+   cursor: pointer;
+}
+
+.hover-overlay{
+   display: none;
+   background: fade(#f2f2f2, 95%);
+   position: absolute;
+   width: 200px;
+   height: 300px;
+   
+   h2{
+      font-weight: bold;
+      margin: 10px;
+      text-align: center;
+      font-size: 20px;
+   }
+   
+   ul li{
+      list-style-image: url(../images/layout/star.png);
+      margin: 10px 0 10px 35px;
+      
+   }
+}
+
+#loader-section{
+   margin-top: 50px;
 }
