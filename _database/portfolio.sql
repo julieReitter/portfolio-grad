@@ -7,10 +7,12 @@ password VARCHAR(20) NOT NULL
 CREATE TABLE work (
 work_id INT PRIMARY KEY AUTO_INCREMENT,
 name VARCHAR(30) NOT NULL,
-description VARCHAR(50) NOT NULL,
+description VARCHAR(1000) NOT NULL,
 thumbnail VARCHAR(20) NOT NULL,
 goody BOOLEAN,
-link varchar(100)
+link varchar(200),
+date DATE,
+order_value INT,
 );
 
 CREATE TABLE skills (
@@ -28,10 +30,5 @@ image_id INT PRIMARY KEY AUTO_INCREMENT,
 image_file VARCHAR(20) NOT NULL,
 work_id INT REFERENCES work(work_id)
 );
-
---
-
-ALTER TABLE work
-ADD user_id INT REFERENCES user(user_id)
 
 

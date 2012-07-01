@@ -15,6 +15,7 @@
 <script src="<?php echo ROOT . "/resources/lib/chosen.jquery.min.js";?>" type="text/javascript"></script>
 <!-- My Scripts -->
 <script src="<?php echo ROOT . "/js/load_thumbnails.js";?>" type="text/javascript"></script>
+<script src="<?php echo ROOT . "/js/full_work.js";?>" type="text/javascript"></script>
 </head>
 
 <body>

@@ -1,16 +1,19 @@
 /*************************************
 * Julie Reitter Portfolio 
 * Copyright 2012
+
+This file loads the thumbnails from the
+skills selected in the search or 
+featured images if search is empty
 **************************************/
 var j;
 $(document).ready(function(){
-	//Get Featured Work, Any work where order < 8
+	//Get Featured Work, Any work where skill not featured limit 8
 	function loadFeaturedWork(){
 		var featuredWork = [];
 		$.getJSON('js/skills.json', function(json, skill){
 			//Assumes featured work is id - 0;
 			j = json;
-			console.log(json);
 		}).complete(function(){
 			populateThumbnails(featuredWork);
 		});
@@ -34,7 +37,7 @@ $(document).ready(function(){
 				});
 			});
 		}).complete(function(){
-			populateThumbnails(selectedWork);
+			populateThumbnails(selectedWork, workIds);
 		});
 	}
 	
@@ -47,9 +50,9 @@ $(document).ready(function(){
 		}
 	});
 	
-	function populateThumbnails(selectedWork){
+	function populateThumbnails(selectedWork, ids){
 		var $loadSection = $("#loader-section"),
-			workHtml = '';		
+			workHtml = '<div id="full-details"></div> ';		
 				
 		$.each(selectedWork, function(key, value){
 			var html = '', 
@@ -60,25 +63,26 @@ $(document).ready(function(){
 			});
 			
 			html = '<div class="thumbnail">';
+			html += '<a href="#" id="' + ids[key] + '">';
 			html += '<span class="hover-overlay">';
 			html += "<h2>" + value.name + "</h2>"
 			html += "<ul>" + skillsList + "</ul>";
 			html += '</span>';
 			html += "<img src='images/content/thumbnails/" + value.thumbnail + "' alt='" + value.name + "'/>";
-			html += '</div>';
+			html += '<a/></div>';
 			
 			workHtml += html;
 		});
 		
-		/******************************
-		* Remove all thumbnails that aren't relevant
-		******************************/
-		$loadSection.children().fadeOut().empty();
 		
+		//Remove all thumbnails that aren't relevant
+		$loadSection.children().fadeOut().empty();
 		
 		//Load Contents into container
 		$loadSection.html(workHtml);
 			
+		//Bind hover to thumbnails 
+		$loadSection.find(".thumbnail a").hover(skillsHoverOverlay, hideOverlay).on("click", getWork);
 	}
 	
 	//Onload triggers
@@ -87,7 +91,31 @@ $(document).ready(function(){
 	/***********************************
 	* THUMBNAIL HOVER
 	************************************/
-	var $thumbnail = $("body").find(".thumbnail"),
-		$overlay = $thumbnail.find(".hover-overlay");
+	function skillsHoverOverlay(event){
+		var $this = $(this),
+			$overlay = $this.find(".hover-overlay");
+			
+		$overlay.slideDown("fast");
+		$overlay.bind("mouseout", hideOverlay);
+	}	
+	
+	function hideOverlay(event){
+		var $this = $(this);
+		$this.find(".hover-overlay").slideUp("fast");	
+	}
+	
+	function getWork(event){
+		var $this = $(this),
+			$fullDetails = $("#full-details"),
+			id = $this.attr("id");
+		
+		event.preventDefault();
+		work(id).loadWorkDetails();
+
+		if($fullDetails.html() != ""){
+			$("body").scrollTop(300);
+		}
+					
+	}
 	
 });

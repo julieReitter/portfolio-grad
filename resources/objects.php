@@ -132,7 +132,7 @@ class Work{
 											 "desc" => $this->description, 
 											 "images" => $this->images, 
 											 "date" => $this->dateCreated, 
-											 "order" => $this->orderVal,
+											 "skills" => $this->skillTitles,
 											 "link" => $this->link);
 			file_put_contents('../js/works.json', json_encode($workJsonData));
 		

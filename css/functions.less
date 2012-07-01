@@ -39,6 +39,14 @@ LESS FUNCTIONS
 	background: -linear-gradient(top, lighten(@color, 10%) 0%, darken(@color, 10%) 100%);
 }
 
+.reverse-gradient(@color: @blue){
+	background: darken(@color, 15%);
+	background: -webkit-linear-gradient(top, darken(@color, 10%) 0%, lighten(@color, 10%) 100%);
+	background: -moz-linear-gradient(top, darkent(@color, 10%) 0%, lighten(@color, 10%) 100%);
+	background: -o-linear-gradient(top, darken(@color, 10%) 0%, lighten(@color, 10%) 100%);
+	background: -linear-gradient(top, darken(@color, 10%) 0%, lighten(@color, 10%) 100%);		  
+}
+
 .work (@width: 200px){
 	width: @width;
 	padding: 8px;

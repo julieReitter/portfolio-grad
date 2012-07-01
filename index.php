@@ -20,6 +20,7 @@
 	</select>
 		
 	<div id="loader-section">
+		<div id="full-details"></div>
 	</div>
 	
 </section><!--close content-->	
