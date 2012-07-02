@@ -79,7 +79,7 @@ $(document).ready(function(){
 		$loadSection.children().fadeOut().empty();
 		
 		//Load Contents into container
-		$loadSection.html(workHtml);
+		$loadSection.html(workHtml).fadeIn();
 			
 		//Bind hover to thumbnails 
 		$loadSection.find(".thumbnail a").hover(skillsHoverOverlay, hideOverlay).on("click", getWork);
@@ -114,8 +114,7 @@ $(document).ready(function(){
 
 		if($fullDetails.html() != ""){
 			$("body").scrollTop(300);
-		}
-					
+		}					
 	}
 	
 });

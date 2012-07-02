@@ -84,6 +84,24 @@ class Work{
 	
 	}//close create
 	
+	public function edit(){
+		  $editQuery = "UPDATE work SET
+								'$this->name', 
+								'$this->description', 
+								'$this->thumbnail', 
+								'$this->goody', 
+								'$this->dateCreated', 
+								'$this->orderVal',
+								'$this->link')
+								WHERE work_id $this->$id";
+		  $editResults = mysql_query($editQuery);
+		  if($editResults){
+					 return true;
+		  }
+		  
+		  
+	}
+	
 	public function delete($id){
 		
 		$deleteWorkQuery = "DELETE FROM work WHERE work_id=$id";
@@ -147,7 +165,6 @@ class Work{
 		}
 	}//close createJson
 	
-		
 }//close work
 
 ?>

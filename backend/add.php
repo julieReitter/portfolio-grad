@@ -38,8 +38,30 @@
 			//var_dump($work);		
 			header("Location: overview.php");
 		}
-		
 	}
+   
+   if(isset($_GET['edit'])){
+      $id = $_GET['edit'];
+      
+      $queryWork = "SELECT * FROM work WHERE work_id = '$id'";
+      $result = mysql_query($queryWork);
+      $rowCount = mysql_num_rows($result);
+
+      if($rowCount == 1){
+         $w = mysql_fetch_assoc($result);
+         
+         $work = new Work();
+         $work -> setProperty("name", $w["name"]);
+         $work -> setProperty("datedCreated", $w["date"]);
+         $work -> setProperty("orderVal", $w["order_value"]);
+         $work -> setProperty("goody", $w["goody"]);
+         $work -> setProperty("description", $w["description"]);
+         $work -> setProperty("link", $w["link"]);
+      }else{
+         $error = "There was a problem editing the work post";
+      }
+      
+   }
 	
 	include('../header.php');
 ?>

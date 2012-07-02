@@ -33,7 +33,7 @@
 					<tr>
 						<td><?php echo date('m/d/Y' , strtotime($row['date'])); ?></td>
 						<td><?php echo $row['name']; ?></td>
-						<td><a href="#" class="edit">Edit</a></td>
+						<td><a href="add.php?edit=<?php echo $row['work_id'];?>"" class="edit">Edit</a></td>
 						<td><a href="delete.php?delete=<?php echo $row['work_id'];?>" class="delete">Delete</a></td>
 					</tr>
 				<?php endwhile;?>

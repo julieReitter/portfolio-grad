@@ -5,7 +5,6 @@
   display: inline-block;
   zoom: 1;
   *display: inline;
-  margin: 10px 20px;
 }
 .chzn-container .chzn-drop {
   background: #fff;
@@ -19,7 +18,6 @@
   -o-box-shadow     : 0 4px 5px rgba(0,0,0,.15);
   box-shadow        : 0 4px 5px rgba(0,0,0,.15);
   z-index: 1010;
-  width: 460px !important;
 }
 /* @end */
 
@@ -77,9 +75,6 @@
 }
 .chzn-container-single .chzn-single abbr:hover {
   background-position: right -11px;
-}
-.chzn-container-single.chzn-disabled .chzn-single abbr:hover {
-  background-position: right top;
 }
 .chzn-container-single .chzn-single div {
   position: absolute;
@@ -141,18 +136,14 @@
   background-image: -o-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
   background-image: -ms-linear-gradient(top, #eeeeee 1%, #ffffff 15%);
   background-image: linear-gradient(top, #eeeeee 1%, #ffffff 15%);
-  border: 1px solid #e5e5e5;
+  border: 1px solid #aaa;
   margin: 0;
-  width: 450px;
-  padding: 12px;
+  padding: 0;
   cursor: text;
   overflow: hidden;
   height: auto !important;
   height: 1%;
   position: relative;
-  -webkit-box-shadow: inset 1px 2px 5px #EDEDED, 1px 1px 2px white;
-  -moz-box-shadow: inset 1px 2px 5px #EDEDED, 1px 1px 2px white;
-  box-shadow: inset 1px 2px 5px #EDEDED, 1px 1px 2px white;
 }
 .chzn-container-multi .chzn-choices li {
   float: left;

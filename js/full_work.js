@@ -11,7 +11,7 @@ var work = function(id){
 	var skillsList;
 	
 	var getDetailsFromWork = function(){
-		workPage = $.getJSON ("js/works.json", id, function(json){
+		$.getJSON ("js/works.json", id, function(json){
 			workDetails = json[id];
 		}).complete(function(){
 			populateWorkDetails(workDetails);
@@ -20,6 +20,7 @@ var work = function(id){
 	
 	var populateWorkDetails = function(workObj){
 		var $fullDetailsSection = $("#full-details"),
+			height = $("#gallery").height();
 			images = '',
 			skillsList = '',
 			html = '';
@@ -33,15 +34,34 @@ var work = function(id){
 		html += images;
 		html += '</ul></div>';
 		html += '<div id="details">';
-		html += '<h2>' + workObj.name + '</h2>';
+		html += '<h2>' + workObj.name + ' <a href="#" class="fr close">X Close</a></h2>';
 		html += '<p>' + workObj.desc + '</p>';
 		html += '<a href="' + workObj.link + '" class="button" target="_blank">Visit Site</a>';
 		html += '</div>';
 		
-		$fullDetailsSection.html(html).slideDown();
-		$fullDetailsSection.after("<div class='clearfix'></div>");			
-	};
+		if($fullDetailsSection.html() == ''){
+			$fullDetailsSection.html(html).slideDown();
+			$(".close").click(closeFullDetails);
+		}else{
+			$fullDetailsSection.css("min-height" , height);
+			$fullDetailsSection.fadeOut(function(){
+				$fullDetailsSection.html(html).fadeIn();
+				$(".close").click(closeFullDetails);	
+			});
+		}
 		
+		$fullDetailsSection.after("<div class='clearfix'></div>");
+	};
+	
+	var closeFullDetails = function(event){
+		var $fullDetailsSection = $("#full-details");
+		event.preventDefault();
+		
+		$fullDetailsSection.slideUp( function(){
+			$fullDetailsSection.empty();
+		});
+	};
+	
 	return {
 		loadWorkDetails : function(){
 			getDetailsFromWork(id);
