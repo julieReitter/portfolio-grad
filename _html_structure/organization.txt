@@ -1,0 +1,38 @@
+SITE
+   /
+      header.php
+      index.php
+      about.php
+      goodies.php
+      contact.php
+      footer.php
+      
+      /css
+	 global.css.less
+	 
+      /js
+	 validation.js
+	 ajax.js
+	 
+      /images
+	 /content
+	    /thumbnails
+	 /layout
+      
+      /backend
+	 index.php
+	 overview.php
+	 add.php
+	 delete.php
+      
+      /resources
+	 connection.php
+	 functions.php
+	 objects.php
+	 sendform.php
+	 
+	 /lib
+	    jquery.min.css
+	    chosen.js (or other new one)
+	    ??? gallery plugin ?
+	 

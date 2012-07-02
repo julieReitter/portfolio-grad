@@ -31,8 +31,9 @@ if(isset($_GET['error'])){
 }//close error check
 
 if($sent == false){
+include('header.php');
 ?>
-<div id="contact-form">
+<section id="content" class="contact-contain">
 	<form id="contact" method="post" action="resources/sendform.php">
 		<input type="hidden" name="postback" value="set"/>
 		<input type="text" name="name" id="name" placeholder="Your Name*" value ="<?php if(isset($postback['name'])) echo $postback['name'];?>" required="required" />
@@ -40,21 +41,34 @@ if($sent == false){
 		<input type="text" name="email" id="email" placeholder="Your Email*"  value ="<?php if(isset($postback['email'])) echo $postback['email'];?>" required="required"/>
 		<span class="error"><?php if(isset($errors['email'])) echo $errors['email'];?></span>
 		<input type="text" name="website" id="website" placeholder="You Website" value ="<?php if(isset($postback['website'])) echo $postback['website'];?>"/>
-		<textarea name="message" id="message" placeholder="Your Message*" required="required">
-			<?php if(isset($postback['message'])) echo $postback['message'];?>
+		<textarea name="message" id="message" required="required">
+			<?php 
+			if(isset($postback['message'])) 
+				echo $postback['message'];
+			else
+				echo "Your Message*";
+			?>
 		</textarea>
 		<span class="error"><?php if(isset($errors['message'])) echo $errors['message'];?></span>
 		<input type="submit" value="Send"/>
 	</form>
-</div>
+	
+	<aside>
+		<h1>Get in touch</h1>
+		<p>Fill out the form to the left <br/>or call 973.615.3429.</p>
+		<p>I'm currently avaiable <br/>for work.</p>	
+	</aside>
+</section>
 <?php 
 }else{
 ?>
-<div id="contact-form">
+<section id="content">
 	<h1>Thank you for contacting me</h1>
 	<h3>I will respond to your message as soon as possible</h3>
 	<p>Social Media Links</p>
-</div>
+</section>
 <?php	
 }//close sent check
 ?>
+
+<?php include('footer.php'); ?>

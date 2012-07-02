@@ -38,45 +38,68 @@
 			//var_dump($work);		
 			header("Location: overview.php");
 		}
-		
 	}
+   
+   if(isset($_GET['edit'])){
+      $id = $_GET['edit'];
+      
+      $queryWork = "SELECT * FROM work WHERE work_id = '$id'";
+      $result = mysql_query($queryWork);
+      $rowCount = mysql_num_rows($result);
 
+      if($rowCount == 1){
+         $w = mysql_fetch_assoc($result);
+         
+         $work = new Work();
+         $work -> setProperty("name", $w["name"]);
+         $work -> setProperty("datedCreated", $w["date"]);
+         $work -> setProperty("orderVal", $w["order_value"]);
+         $work -> setProperty("goody", $w["goody"]);
+         $work -> setProperty("description", $w["description"]);
+         $work -> setProperty("link", $w["link"]);
+      }else{
+         $error = "There was a problem editing the work post";
+      }
+      
+   }
+	
+	include('../header.php');
 ?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Julie Reitter Portfolio Backend | Add New</title>
-</head>
-<body>
+<section id="content">
 	<form id="add-work" action="add.php" method="post" enctype="multipart/form-data">
 		<span><?php if(isset($error)) echo $error; ?></span>
 		<div class="fl">
-			<input type="hidden" name="postback" value="set"/>
-			<input type="text" name="title" id="title" placeholder="Title*" value="<?php if(isset($work)) echo $work -> name;?>"/>
-			<input type="text" name="date" id="date" placeholder-"date" value="<?php if(isset($work)){ echo $work -> dateCreated; } else{ echo $today; }?>"/>
-			<input type="text" name="order" id="order" placeholder="Order" value="<?php if(isset($work)) echo $work -> orderVal;?>"/><br/>
-			<textarea name="description" id="description" placeholder="Description*"><?php if(isset($work)) echo $work -> description;?></textarea>
-			<input type="text" name="link" id="link" placeholder="Link" value="<?php if(isset($work)) echo $work -> link;?>"/>
-			<select name="skills[]" id="skills" multiple>
-				<?php if(!empty($skillsResult)) : ?>
-				<?php while( $row = mysql_fetch_assoc($skillsResult) ) : ?>
-					<option value="<?php echo $row['skill_id']; ?>"> 
-						<?php 
-							echo $row['skill_title']; 
-							$skillTitles[$row['skill_id']] = $row['skill_title'];
-						?> 
-					</option>			
-				<?php endwhile; ?>
-				<?php endif; ?>
-			</select><br/>
-			<?php $skillTitlesStr = implode("," , $skillTitles); ?>
-			<input type="hidden" name="stitles" id="stitles" value="<?php echo $skillTitlesStr; ?>"/>
-			<input type="checkbox" name="goody" id="goody" value="Goody" <?php if(isset($work) && $work->goody) echo "checked = checked";?> /> Goody <br/>
-		</div>
+		<input type="hidden" name="postback" value="set"/>
+		<input type="text" name="title" id="title" placeholder="Title*" value="<?php if(isset($work)) echo $work -> name;?>"/>
+		<input type="text" name="date" id="date" placeholder-"date" value="<?php if(isset($work)){ echo $work -> dateCreated; } else{ echo $today; }?>"/>
+		<input type="text" name="order" id="order" placeholder="Order" value="<?php if(isset($work)) echo $work -> orderVal;?>"/>
+		<textarea name="description" id="description" placeholder="Description*"><?php if(isset($work)) echo $work -> description;?></textarea>
+		<input type="text" name="link" id="link" placeholder="Link" value="<?php if(isset($work)) echo $work -> link;?>"/>
+		<select name="skills[]" id="skills" multiple>
+			<?php if(!empty($skillsResult)) : ?>
+			<?php while( $row = mysql_fetch_assoc($skillsResult) ) : ?>
+				<option value="<?php echo $row['skill_id']; ?>"> 
+					<?php 
+						echo $row['skill_title']; 
+						$skillTitles[$row['skill_id']] = $row['skill_title'];
+					?> 
+				</option>			
+			<?php endwhile; ?>
+			<?php endif; ?>
+		</select>
+		<?php $skillTitlesStr = implode("," , $skillTitles); ?>
+		<input type="hidden" name="stitles" id="stitles" value="<?php echo $skillTitlesStr; ?>"/>
+		</div><br/>
+		<h3>Thumbnail</h3>
 		<input type="file" name="thumbnail[]" id="thumbnail" value="thumbnail"/>
-		<input type="file" name="images[]" id="images" multiple value="images"/>
+		<h3>All Images</h3>
+		<input type="file" name="images[]" id="images" multiple value="images"/><br/>
+		<input type="checkbox" name="goody" id="goody" value="Goody" <?php if(isset($work) && $work->goody) echo "checked = checked";?> /> Goody <br/>
 		<input type="submit" value="Submit" />
 	</form>	
+</section>
 </body>
 </html>
+<script type="text/javascript">
+	$("#skills").chosen();
+</script>

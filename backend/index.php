@@ -22,16 +22,9 @@
 			}
 		}		
 	}
-
+	
+	include('../header.php');
 ?>
-
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Julie Reitter Portfolio Backend</title>
-</head>
-<body>
 	<section id="content" class="login">
 		<form id="login" action="index.php" method="post">
 			<span class="error"><?php if(isset($error)) echo $error; ?></span>

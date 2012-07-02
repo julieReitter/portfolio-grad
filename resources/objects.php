@@ -84,6 +84,24 @@ class Work{
 	
 	}//close create
 	
+	public function edit(){
+		  $editQuery = "UPDATE work SET
+								'$this->name', 
+								'$this->description', 
+								'$this->thumbnail', 
+								'$this->goody', 
+								'$this->dateCreated', 
+								'$this->orderVal',
+								'$this->link')
+								WHERE work_id $this->$id";
+		  $editResults = mysql_query($editQuery);
+		  if($editResults){
+					 return true;
+		  }
+		  
+		  
+	}
+	
 	public function delete($id){
 		
 		$deleteWorkQuery = "DELETE FROM work WHERE work_id=$id";
@@ -118,7 +136,7 @@ class Work{
 		if(!$this->goody){
 			//For work that is not a goody add to skills json
 			$jsonData = json_decode(file_get_contents('../js/skills.json'), true);
-			foreach($this->skills as $skill){
+			foreach($this->skillTitles as $skill){
 				$jsonData[$skill][$this->id] = array( "order" => $this->orderVal, 
 													  "name" => $this->name, 
 													  "thumbnail" => $this->thumbnail, 
@@ -132,7 +150,7 @@ class Work{
 											 "desc" => $this->description, 
 											 "images" => $this->images, 
 											 "date" => $this->dateCreated, 
-											 "order" => $this->orderVal,
+											 "skills" => $this->skillTitles,
 											 "link" => $this->link);
 			file_put_contents('../js/works.json', json_encode($workJsonData));
 		
@@ -147,7 +165,6 @@ class Work{
 		}
 	}//close createJson
 	
-		
 }//close work
 
 ?>
