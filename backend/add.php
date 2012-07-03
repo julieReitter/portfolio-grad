@@ -34,19 +34,16 @@
 		if(!$valid){
 			$error = "There was an error processing the form. Make sure all required fields are filled";
 		}else{
-			$work -> create();
-			//var_dump($work);		
+			$work -> create();		
 			header("Location: overview.php");
 		}
-	}
-   
-   if(isset($_GET['edit'])){
+	}else if(isset($_GET['edit'])){
       $id = $_GET['edit'];
       
       $queryWork = "SELECT * FROM work WHERE work_id = '$id'";
       $result = mysql_query($queryWork);
       $rowCount = mysql_num_rows($result);
-
+      
       if($rowCount == 1){
          $w = mysql_fetch_assoc($result);
          
@@ -57,8 +54,20 @@
          $work -> setProperty("goody", $w["goody"]);
          $work -> setProperty("description", $w["description"]);
          $work -> setProperty("link", $w["link"]);
+         
+         $queryImages = "SELECT * FROM images WHERE work_id = '$id'";
+         $imageResults = mysql_query($queryImages);
+         
+         $workSkillsQ ="SELECT skill_id FROM work_skills WHERE work_id = '$id'";
+         $wsResults = mysql_query($workSkillsQ);
+         
+         $selectedIds = array();
+         while($workSkills = mysql_fetch_assoc($wsResults)){
+            $selectedIds[] = $workSkills['skill_id'];
+         }
       }else{
          $error = "There was a problem editing the work post";
+         $w = mysql_fetch_array($result);
       }
       
    }
@@ -70,18 +79,23 @@
 		<span><?php if(isset($error)) echo $error; ?></span>
 		<div class="fl">
 		<input type="hidden" name="postback" value="set"/>
-		<input type="text" name="title" id="title" placeholder="Title*" value="<?php if(isset($work)) echo $work -> name;?>"/>
+		<input type="hidden" name="edit" value="edit"
+      <input type="text" name="title" id="title" placeholder="Title*" value="<?php if(isset($work)) echo $work -> name;?>"/>
 		<input type="text" name="date" id="date" placeholder-"date" value="<?php if(isset($work)){ echo $work -> dateCreated; } else{ echo $today; }?>"/>
 		<input type="text" name="order" id="order" placeholder="Order" value="<?php if(isset($work)) echo $work -> orderVal;?>"/>
 		<textarea name="description" id="description" placeholder="Description*"><?php if(isset($work)) echo $work -> description;?></textarea>
 		<input type="text" name="link" id="link" placeholder="Link" value="<?php if(isset($work)) echo $work -> link;?>"/>
-		<select name="skills[]" id="skills" multiple>
+      <select name="skills[]" id="skills" multiple>
 			<?php if(!empty($skillsResult)) : ?>
-			<?php while( $row = mysql_fetch_assoc($skillsResult) ) : ?>
-				<option value="<?php echo $row['skill_id']; ?>"> 
+			<?php
+         $count = 0;
+         
+         while( $row = mysql_fetch_assoc($skillsResult) ) : ?>
+				<option value="<?php echo $row['skill_id']; ?>" <?php if(isset($selectedIds) && in_array($row['skill_id'], $selectedIds)) echo "selected='selected'";?>> 
 					<?php 
 						echo $row['skill_title']; 
 						$skillTitles[$row['skill_id']] = $row['skill_title'];
+                  $count ++;
 					?> 
 				</option>			
 			<?php endwhile; ?>
@@ -90,6 +104,19 @@
 		<?php $skillTitlesStr = implode("," , $skillTitles); ?>
 		<input type="hidden" name="stitles" id="stitles" value="<?php echo $skillTitlesStr; ?>"/>
 		</div><br/>
+      <?php
+         if(isset($w)){
+            echo "<div class='edit-images'>";
+            echo "<h3>Thumbnail</h3>";
+            echo "<img src='../images/content/thumbnails/" . $w['thumbnail']. "' alt='image' width='120'/>";
+            echo "<h3>Images</h3>";
+            while($images = mysql_fetch_assoc($imageResults)){
+               echo "<img src='../images/content/" . $images['image_file']. "' alt='image' width='120'/><a href='#' class='delete' id='" . $images['image_id'] . "'>Delete</a>";
+            }
+            echo "</div><div class='clearfix'></div>";
+            echo "<h2>Add Images &amp; Change Thumbnail</h2>";
+         }
+      ?>
 		<h3>Thumbnail</h3>
 		<input type="file" name="thumbnail[]" id="thumbnail" value="thumbnail"/>
 		<h3>All Images</h3>
