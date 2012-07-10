@@ -87,7 +87,9 @@ $(document).ready(function(){
 	
 	//Onload triggers
 	loadFeaturedWork();
-	
+	//Goody onload
+	$(".goody a").hover(goodyHoverOverlay, hideGoodyOverlay);
+
 	/***********************************
 	* THUMBNAIL HOVER
 	************************************/
@@ -116,5 +118,17 @@ $(document).ready(function(){
 			$("body").scrollTop(300);
 		}					
 	}
+	
+	function goodyHoverOverlay(event){
+		var $this = $(this),
+			 $overlay = $this.find(".download-overlay");
+		$overlay.slideDown('fast');
+	}
+	
+	function hideGoodyOverlay(event){
+		var $this = $(this);
+		$this.closest('.goody').find('.download-overlay').slideUp('fast');
+	}
+	
 	
 });

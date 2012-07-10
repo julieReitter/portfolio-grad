@@ -57,6 +57,20 @@
          $work -> setProperty("goody", $w["goody"]);
          $work -> setProperty("description", $w["description"]);
          $work -> setProperty("link", $w["link"]);
+			
+			$queryImages = "SELECT * FROM images WHERE work_id = '$id'";
+			$imageResults = mysql_query($queryImages);
+			
+			$workSkillsQ = "SELECT * FROM work_skills WHERE work_id = '$id'";
+			$retrieveWS = mysql_query($workSkillsQ);
+			
+			$selectedIds = array();
+			while($work_skills = mysql_fetch_assoc($retrieveWS)){
+				$selectedIds[] = $work_skills['skill_id'];
+			}
+			
+			
+			
       }else{
          $error = "There was a problem editing the work post";
       }
@@ -77,8 +91,9 @@
 		<input type="text" name="link" id="link" placeholder="Link" value="<?php if(isset($work)) echo $work -> link;?>"/>
 		<select name="skills[]" id="skills" multiple>
 			<?php if(!empty($skillsResult)) : ?>
+			<?php $count = 0; ?>
 			<?php while( $row = mysql_fetch_assoc($skillsResult) ) : ?>
-				<option value="<?php echo $row['skill_id']; ?>"> 
+				<option value="<?php echo $row['skill_id']; ?>" <?php if(isset($selectedIds) && in_array($row['skill_id'], $selectedIds)) echo "selected='selected'";?>> 
 					<?php 
 						echo $row['skill_title']; 
 						$skillTitles[$row['skill_id']] = $row['skill_title'];
@@ -90,6 +105,20 @@
 		<?php $skillTitlesStr = implode("," , $skillTitles); ?>
 		<input type="hidden" name="stitles" id="stitles" value="<?php echo $skillTitlesStr; ?>"/>
 		</div><br/>
+		<?php
+			if(isset($w)){
+				echo "<div class='edit-images'>";
+				echo "<h3>Thumbnail</h3>";
+				echo "<img src='../images/content/thumbnails/" . $w['thumbnail'] . "' alt='image' width='120' />";
+				echo "<h3>Images</h3>";
+				while($images = mysql_fetch_assoc($imageResults)){
+					echo "<img src='../images/content/" . $images['image_file'] . "' alt='image' width='120' />
+							<a href='#' class='delete' id='" . $images['image_id'] . "'> Delete </a>";
+				}
+				echo "</div><div class='clearfix'></div>";
+				echo "<h2>Add Images &amp; Change Thumbnail</h2>";
+			}
+		?>
 		<h3>Thumbnail</h3>
 		<input type="file" name="thumbnail[]" id="thumbnail" value="thumbnail"/>
 		<h3>All Images</h3>
