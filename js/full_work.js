@@ -29,6 +29,12 @@ var work = function(id){
 			images += "<li><img src='images/content/" + value + "' alt='" + workObj.name + "'></li>";	
 		});
 		
+		/*
+		$.each(workObj.skills, function(index){
+			skillsList += "<li>" + workObj.skills[index] + "</li>";
+		});
+		*/
+		
 		html += '<div id="gallery">';
 		html += '<ul>';
 		html += images;
@@ -36,7 +42,10 @@ var work = function(id){
 		html += '<div id="details">';
 		html += '<h2>' + workObj.name + ' <a href="#" class="fr close">X Close</a></h2>';
 		html += '<p>' + workObj.desc + '</p>';
-		html += '<a href="' + workObj.link + '" class="button" target="_blank">Visit Site</a>';
+		html += "<ul class='item-skills'>" + skillsList + "</ul>";
+		if(workObj.link != ""){
+			html += '<a href="' + workObj.link + '" class="button" target="_blank">Visit Site</a>';	
+		}
 		html += '</div>';
 		
 		if($fullDetailsSection.html() == ''){

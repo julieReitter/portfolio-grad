@@ -20,13 +20,15 @@
 
 <body>
 	<header>
-		<nav>
-			<ul>
-				<li><a href="<?php echo ROOT . "/index.php";?>">home</a></li>
-				<li><a href="<?php echo ROOT . "/about.php";?>">about</a></li>
-				<li id="logo"><a href="<?php echo ROOT . "index.php";?>"></a></li>
-				<li><a href="<?php echo ROOT . "/goodies.php";?>">goodies</a></li>
-				<li><a href="<?php echo ROOT . "/contact.php";?>">contact</a></li>
-			</ul>
-		</nav>
+		<div class="wrapper">
+			<nav>
+				<ul>
+					<li><a href="<?php echo ROOT . "/index.php";?>">home</a></li>
+					<li><a href="<?php echo ROOT . "/about.php";?>">about</a></li>
+					<li id="logo"><a href="<?php echo ROOT . "index.php";?>"></a></li>
+					<li><a href="<?php echo ROOT . "/goodies.php";?>">goodies</a></li>
+					<li><a href="<?php echo ROOT . "/contact.php";?>">contact</a></li>
+				</ul>
+			</nav>
+		</div>
 	</header>

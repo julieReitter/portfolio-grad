@@ -17,6 +17,8 @@
 	$skillsResult = mysql_query($querySkills);
 	$skillTitles = array();
 	
+	$action = "add.php";
+		
 	if(!empty($_POST['postback'])){
 		$work = new Work();
 		$work -> setProperty("name", $_POST['title']);
@@ -35,7 +37,6 @@
 			$error = "There was an error processing the form. Make sure all required fields are filled";
 		}else{
 			$work -> create();
-			//var_dump($work);		
 			header("Location: overview.php");
 		}
 	}
@@ -52,7 +53,7 @@
          
          $work = new Work();
          $work -> setProperty("name", $w["name"]);
-         $work -> setProperty("datedCreated", $w["date"]);
+         $work -> setProperty("dateCreated", $w["date"]);
          $work -> setProperty("orderVal", $w["order_value"]);
          $work -> setProperty("goody", $w["goody"]);
          $work -> setProperty("description", $w["description"]);
@@ -69,8 +70,9 @@
 				$selectedIds[] = $work_skills['skill_id'];
 			}
 			
+			$editDate = date('m/d/Y', strtotime($work->dateCreated));
 			
-			
+			$action = "edit.php?id=$id";
       }else{
          $error = "There was a problem editing the work post";
       }
@@ -80,12 +82,12 @@
 	include('../header.php');
 ?>
 <section id="content">
-	<form id="add-work" action="add.php" method="post" enctype="multipart/form-data">
+	<form id="add-work" action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
 		<span><?php if(isset($error)) echo $error; ?></span>
 		<div class="fl">
 		<input type="hidden" name="postback" value="set"/>
 		<input type="text" name="title" id="title" placeholder="Title*" value="<?php if(isset($work)) echo $work -> name;?>"/>
-		<input type="text" name="date" id="date" placeholder-"date" value="<?php if(isset($work)){ echo $work -> dateCreated; } else{ echo $today; }?>"/>
+		<input type="text" name="date" id="date" placeholder-"date" value="<?php if(isset($work)){ echo $editDate; } else{ echo $today; }?>"/>
 		<input type="text" name="order" id="order" placeholder="Order" value="<?php if(isset($work)) echo $work -> orderVal;?>"/>
 		<textarea name="description" id="description" placeholder="Description*"><?php if(isset($work)) echo $work -> description;?></textarea>
 		<input type="text" name="link" id="link" placeholder="Link" value="<?php if(isset($work)) echo $work -> link;?>"/>
@@ -108,24 +110,26 @@
 		<?php
 			if(isset($w)){
 				echo "<div class='edit-images'>";
-				echo "<h3>Thumbnail</h3>";
+				echo "<h3>Thumbnail</h3><br>";
 				echo "<img src='../images/content/thumbnails/" . $w['thumbnail'] . "' alt='image' width='120' />";
-				echo "<h3>Images</h3>";
+				echo "<br><h3>Images</h3><br>";
 				while($images = mysql_fetch_assoc($imageResults)){
-					echo "<img src='../images/content/" . $images['image_file'] . "' alt='image' width='120' />
-							<a href='#' class='delete' id='" . $images['image_id'] . "'> Delete </a>";
+					echo "<img src='../images/content/" . $images['image_file'] . "' alt='image' width='120' />";
+							#<a href='#' class='delete' id='" . $images['image_id'] . "'> Delete </a>;
 				}
 				echo "</div><div class='clearfix'></div>";
-				echo "<h2>Add Images &amp; Change Thumbnail</h2>";
-			}
+				echo "Currently Cannot Edit Skills or Images<br>";
+			}else{
 		?>
 		<h3>Thumbnail</h3>
 		<input type="file" name="thumbnail[]" id="thumbnail" value="thumbnail"/>
 		<h3>All Images</h3>
 		<input type="file" name="images[]" id="images" multiple value="images"/><br/>
+		<?php } ?>
 		<input type="checkbox" name="goody" id="goody" value="Goody" <?php if(isset($work) && $work->goody) echo "checked = checked";?> /> Goody <br/>
 		<input type="submit" value="Submit" />
-	</form>	
+	</form>
+	<a href="overview.php" class=".cancel">Cancel</a>
 </section>
 </body>
 </html>

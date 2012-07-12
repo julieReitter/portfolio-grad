@@ -28,7 +28,7 @@ function validateImages($name){
 		$fileError = $_FILES[$name]['error'][$i];
 		$fileSize = $_FILES[$name]['size'][$i];
 		
-		if($fileType == 'image/jpeg' || $fileType == 'image/png'){
+		if($fileType == 'image/jpeg' || $fileType == 'image/png' || $fileType = 'application/zip'){
 			if($fileSize > 2000000 || $fileError > 0){
 				$imageError = false;
 			}

@@ -12,7 +12,7 @@
 		$skillsResult = mysql_query($querySkills);
 		
 		while($row = mysql_fetch_array($skillsResult)){
-			echo "<option value='" . $row['skill_id'] . "'>";
+			echo "<option value='" . $row['skill_title'] . "'>";
 			echo $row['skill_title'];
 			echo "<option>";
 		}

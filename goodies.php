@@ -1,7 +1,7 @@
 <?php include('resources/connection.php');?>
 <?php include('header.php'); ?>
 <?php
-	$goodyQuery = "SELECT * FROM work WHERE goody=1 ";
+	$goodyQuery = "SELECT * FROM work WHERE goody=1 ORDER BY order_value";
 	$retrieveGoodies = mysql_query($goodyQuery);
 ?>
 

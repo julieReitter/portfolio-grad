@@ -4,10 +4,10 @@ require_once("connection.php");
 require_once("functions.php");
 
 class Work{
-	private $id;
+	public $id = NULL;
 	public $name = 'untitled';
-	public $description = 'item work';
-	public $thumbnail = 'unknown.jpg';
+	public $description = '';
+	public $thumbnail = NULL;
 	public $goody = false;
 	public $dateCreated = '00/00/0000';
 	public $orderVal = NULL;
@@ -21,24 +21,38 @@ class Work{
 		$this->$prop = $val;	
 	}//close set prop
 	
+	public function get($id){
+		$getQuery = "SELECT * FROM work WHERE work_id = '$id'";
+		$getObj = mysql_fetch_assoc($getQuery);
+		$this->id = $id;
+		$this->name = $getObj['name'];
+		$this->description = $getObj['description'];
+	}
+	
 	public function validate(){
 		$valid = true;
-		
+		$error = '';
 		//Date Validation
 		$this->dateCreated = validateDate($this->dateCreated);
 		
 		//General Validation
-		if(empty($this->name)) {$valid = false; $error = "name";}
-		if(empty($this->dateCreated) || $this->dateCreated == NULL) {$valid = false; $error = "date";}
-		if(empty($this->description)) {$valid = false; $error = "desc";}
-		if(empty($this->skills)) {$valid = false; $error = "skills";}
-		if(!is_numeric($this->orderVal)) {$valid = false; $error = "order";}
-		if($this->link != NULL && !filter_var($this->link, FILTER_VALIDATE_URL)) {$valid = false; $error = "link";}
-		
+		if(empty($this->name)) {$valid = false; $error .= " name";}
+		if(empty($this->dateCreated) || $this->dateCreated == NULL) {$valid = false; $error .= " date";}
+		if(empty($this->description)) {$valid = false; $error .= " desc";}
+		if(empty($this->skills)) {$valid = false; $error .= " skills";}
+		if(!is_numeric($this->orderVal)) {$valid = false; $error .= " order";}
+		//if($this->link == NULL ) {$valid = false; $error .= " link";} //&& !filter_var($this->link, FILTER_VALIDATE_URL)
 		//validate - images (thumbs)
-		if(!validateImages('thumbnail')) $valid = false;
-		if(!validateImages('images')) $valid = false;
+		if(isset($this->thumbnail) && !validateImages('thumbnail')) {
+			$valid = false;
+			$error .= ' thumbnail';
+		}
+		if(!empty($this->images) && !validateImages('images')){
+			$valid = false;
+			$error .= ' images';
+		}
 		
+		echo $error;
 		return $valid;	
 	}//close validate
 		
@@ -52,7 +66,11 @@ class Work{
 		
 		//Upload Images
 		uploadImage('thumbnail', '../images/content/thumbnails/');
-		uploadImage('images', '../images/content/');
+		if($this->goody = false){
+			uploadImage('images', '../images/content/');
+		}else{
+			uploadImage('images', '../images/content/goodies');
+		}
 		
 		//Insert Work	
 		$addQuery = "INSERT INTO work (name, description, thumbnail, goody, date, order_value, link)
@@ -85,29 +103,49 @@ class Work{
 	}//close create
 	
 	public function edit(){
-		  $editQuery = "UPDATE work SET
-								'$this->name', 
-								'$this->description', 
-								'$this->thumbnail', 
-								'$this->goody', 
-								'$this->dateCreated', 
-								'$this->orderVal',
-								'$this->link')
-								WHERE work_id $this->$id";
-		  $editResults = mysql_query($editQuery);
-		  if($editResults){
-					 return true;
-		  }
-		  
-		  
+		$editQuery = "UPDATE work SET
+							 name = '$this->name', 
+							 description = '$this->description',
+							 goody = '$this->goody', 
+							 date = '$this->dateCreated', 
+							 order_value = '$this->orderVal',
+							 link = '$this->link'
+							 WHERE work_id = '$this->id'";
+		
+		echo $editQuery;
+		
+		$editResults = mysql_query($editQuery);
+		if($editResults){
+			 $skillsJsonData = json_decode(file_get_contents('../js/skills.json'), true);
+			 foreach($skillsJsonData as $key=>$value){
+				$this->thumbnail = $skillsJsonData[$key][$this->id]["thumbnail"];
+				$this->skillTitles =  $skillsJsonData[$key][$this->id]["skills"];
+				$skillsJsonData[$key][$this->id] = array( "order" => $this->orderVal, 
+													  "name" => $this->name, 
+													  "thumbnail" => $this->thumbnail, 
+													  "skills" => $this->skillTitles);
+			 }
+			 file_put_contents('../js/skills.json', json_encode($skillsJsonData));
+			//Remove data from full work json
+			$workJsonData = json_decode(file_get_contents('../js/works.json'), true);
+			$this->skillTitles =  $workJsonData[$this->id]["skills"];
+			$workJsonData[$this->id] =  array("name" => $this->name, 
+											 "desc" => $this->description, 
+											 "images" => $this->images, 
+											 "date" => $this->dateCreated, 
+											 "skills" => $this->skillTitles,
+											 "link" => $this->link);
+			file_put_contents('../js/works.json', json_encode($workJsonData));			
+		}
 	}
 	
 	public function delete($id){
-		
-		$deleteWorkQuery = "DELETE FROM work WHERE work_id=$id";
-		mysql_query($deleteWorkQuery);	
-		$deleteWorkSkillsQuery = "DELETE FROM work_skills WHERE work_id=$id";
-		mysql_query($deleteWorkSkillsQuery);
+		$deleteWorkQuery = "DELETE w.*, ws.*, i.* FROM
+								work w, work_skills ws, images i
+								WHERE w.work_id = ws.work_id
+								AND w.work_id = i.work_id
+								AND w.work_id = $id";
+		mysql_query($deleteWorkQuery);
 		
 		//Remove data from skills json
 		$jsonData = json_decode(file_get_contents('../js/skills.json'), true);
@@ -118,18 +156,8 @@ class Work{
 		
 		//Remove data from full work json
 		$workJsonData = json_decode(file_get_contents('../js/works.json'), true);
-		foreach($workJsonData as $key=>$val){
-			unset($workJsonData[$key]["$id"]);
-		}
-		file_put_contents("../js/works.json", json_encode($workJsonData));
-		
-		//Remove data goodies json
-		$goodiesJsonData = json_decode(file_get_contents('../js/goodies.json'), true);
-		foreach($goodiesJsonData as $key=>$val){
-			unset($goodiesJsonData[$key]["$id"]);
-		}
-		file_put_contents("../js/goodies.json", json_encode($goodiesJsonData));
-				
+		unset($workJsonData[$id]);
+		file_put_contents("../js/works.json", json_encode($workJsonData));				
 	}
 	
 	public function createJson(){
@@ -153,17 +181,24 @@ class Work{
 											 "skills" => $this->skillTitles,
 											 "link" => $this->link);
 			file_put_contents('../js/works.json', json_encode($workJsonData));
-		
-		}else{
-			//For work that is a goody add to goodies json
-			$jsonData = json_decode(file_get_contents('../js/goodies.json'), true);
-			$jsonData[$this->id] = array("name" => $this->name, 
-										 "thumbnail" => $this->thumbnail, 
-										 "desc" => $this->description,
-										 "link" => $this->link);
-			file_put_contents('../js/goodies.json', json_encode($jsonData));
 		}
 	}//close createJson
+	
+	public function editOrder($goody = false){
+		$editOrderQuery = "UPDATE work SET order_value = '$this->orderVal' WHERE work_id = $this->id";
+		mysql_query($editOrderQuery);
+
+		if(!$goody){
+			$jsonData = json_decode(file_get_contents('../js/skills.json'), true);
+			foreach($jsonData as $skill=>$id){
+				if(isset($jsonData[$skill][$this->id])){
+					$jsonData[$skill][$this->id]['order'] = $this->orderVal;
+				}
+			}
+			file_put_contents('../js/skills.json', json_encode($jsonData));
+		}
+		
+	}
 	
 }//close work
 
