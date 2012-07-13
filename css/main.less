@@ -1,0 +1,330 @@
+@import url("reset.css");
+@import url("functions.less");
+
+body{
+   background: @lightGray;
+   background-image: url(../images/layout/stripebg.png);
+   font-size: 16px;
+   font-family: "Century Gothic", CenturyGothic, "Apple Gothic", Arial, sans-serif;
+   color: @darkGray;
+	overflow-y: scroll;
+}
+
+p{
+   margin: 15px 0;
+}
+
+h1{
+   color: @darkGray;
+   font-family: @lobster cursive;
+   font-size: 45px;
+   text-shadow: 0 2px 2px @white;
+   line-height: 60px;
+   
+   &#tagline{
+      padding: 10px 25px;
+   }
+   
+}
+
+a{
+   color: @blue;
+   text-decoration: none;
+}
+
+.clearfix{
+   height: 1px;
+   clear: both;
+   display: block;
+}
+
+header{
+   height: 45px;
+   background: @blue;
+   background-image: url(../images/layout/bluestar.png);
+   border-bottom: solid 1px darken(@blue, 20%);
+   outline: @white solid 1px;
+	
+	.wrapper{
+		.center(960px);
+	}
+}
+
+nav{
+   .center(700px);
+   
+   ul li{
+      list-style-type: none;
+      float: left;
+      width: 100px;
+      text-align: center;
+      text-transform: lowercase;
+      color: #fff;
+      font-weight: bold;
+      
+      a{
+	 color: @white;
+	 line-height: 43px;
+	 text-shadow: 0 1px 2px darken(@blue, 20%);
+	 font-size: 18px;
+      }
+   }
+}
+
+#logo{
+   width: 300px;
+   height: 75px;
+   
+   a{
+      .link-block;
+      background-image: url(../images/layout/logo.png);
+      background-repeat: no-repeat;
+      background-position: 0 -8px;
+   }
+}
+
+#content{
+   .center(960px);
+   clear: both;
+   margin-top: 50px;
+}
+
+#skills-select, #skills_select_chzn{
+   width: 475px;
+   margin: 30px auto;
+   display: block;
+   clear:both;
+}
+
+#loader-area{
+   clear: both;
+}
+
+#contact{
+   .fl;
+   margin-right: 20px;
+}
+
+.login{
+   .center(500px) !important;
+   margin-top: 80px !important;
+}
+
+input[type="text"], input[type="password"],
+textarea{
+   .user-input;
+   width: 450px;
+   display: block;
+   margin: 20px;
+   color: darken(@lightGray, 20%);
+   font-family: "Century Gothic", CenturyGothic, "Apple Gothic", Arial, sans-serif;
+}
+
+textarea{
+   white-space: normal;
+   height: 175px;
+}
+
+input[type="submit"], .button{
+   .gradient;
+   padding: 5px;
+   width: 477px;
+   margin: 10px 20px;
+   border: solid 1px darken(@blue, 20%);
+   border-radius: 20px;
+   box-shadow: inset 0 1px 1px lighten(@blue, 20%);
+   color: @white;
+   font-weight:bold;
+   font-size: 22px;
+   font-family: "Century Gothic", CenturyGothic, "Apple Gothic", Arial, sans-serif;
+   text-transform: lowercase;
+   text-align: center;
+   text-shadow: 0 1px 2px darken(@blue, 20%);
+
+	&:hover{
+		.reverse-gradient;
+		box-shadow: inset 0 1px 1px darken(@blue, 30%);
+	}
+	
+}
+
+input[type="file"]{
+   padding: 10px 0 30px 0;
+}
+   
+.contact-contain{
+   .center(750px) !important;
+   margin-top: 50px !important;
+}
+
+#overview{
+   .center(960px);
+   background: @white;
+   border: solid 1px @lightGray;
+   .shadow;
+   margin-top: 20px !important;
+   
+   thead th{
+      text-align: left;
+      padding: 8px 10px;
+      text-transform: uppercase;
+      border-bottom: solid 1px @lightGray;
+   }
+   
+   td{
+      width: 250px;
+      padding: 8px 10px;
+      border-bottom: solid 1px @lightGray;
+   }
+
+	.goody-row td{
+		background-color: lighten(@lightGray, 5%);
+		box-shadow: inset 0 3px 10px @lightGray;
+		text-align: center;
+	}
+}
+
+.thumbnail{
+   .fl;
+   .shadow;   
+   width: 200px;
+   height: 300px;
+   padding: 10px;
+   background: @white;
+   border: solid 1px @lightGray;
+   margin: 0 15px 30px 15px;
+   cursor: pointer;   
+
+   a{
+     .link-block;
+	  position: relative;
+   }
+}
+
+.hover-overlay{
+   display: none;
+	background: fade(#f2f2f2, 95%);
+   position: absolute;
+	bottom:0;
+   width: 200px;
+   height: 150px;
+   color: @darkGray !important;
+   border-top: solid 1px @white;
+	
+	h2{
+      font-weight: bold;
+      margin: 10px;
+      text-align: center;
+      font-size: 20px;
+	}
+   
+   ul li{
+      list-style-image: url(../images/layout/star.png);
+      margin: 5px 0 5px 35px;
+      font-size: 12px;
+   }
+}
+
+#loader-section{
+   margin-top: 50px;
+   display:none;
+}
+
+#full-details {
+	display:none;
+}
+
+/*
+#full-details + .clearfix{
+	margin-bottom: 30px;
+}
+*/
+
+#gallery{
+	.fl;
+	width: 550px;
+	margin-left: 15px;
+	margin-bottom: 30px;
+	
+	img{
+		margin-bottom: 10px;
+		padding: 10px;
+		background: @white;
+		border: solid 1px @lightGray;
+		.shadow;
+	}
+}
+
+#details{
+	.fr;
+	width: 375px;
+	margin-left:15px;
+	
+	h2, h3{
+		font-weight: bold;
+	}
+	
+	p{
+		line-height: 22px;
+		text-align: justify;
+	}
+	
+	.button{
+		padding: 5px 30px;
+		margin-left: 0 !important;
+		clear: both;
+	}
+	
+	ul{
+		margin-bottom: 20px;
+	
+		li{
+			list-style-image: url(../images/layout/star.png);
+			margin: 10px 0 10px 20px;
+		}
+	}
+}
+
+.goody{
+	.fl;
+	.shadow;
+	width: 400px;
+	height: 400px;
+   padding: 10px;
+   background: @white;
+   border: solid 1px @lightGray;
+   margin: 15px;
+   
+	h2{
+		font-weight: bold;
+		line-height: 5px;
+		margin-bottom: 0;
+	}
+	
+	p{
+		margin-top: 8px;
+	}
+	
+	.download-overlay{
+		position: absolute;
+		width: 400px;
+		height: 320px;
+		background: fade(#f2f2f2, 95%);
+		background-image: url('../images/layout/download.png');
+		background-repeat: no-repeat;
+		background-position: center center;
+		color: @darkGray;
+		font-weight:bold;
+		text-align:center;
+		line-height: 200px;
+		display: none;
+	}
+	
+	.image-link {
+		width: 400px;
+		height: 320px;
+		display:block;
+		margin-bottom: 20px;
+	}
+	
+}
