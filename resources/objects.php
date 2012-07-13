@@ -67,9 +67,11 @@ class Work{
 		//Upload Images
 		uploadImage('thumbnail', '../images/content/thumbnails/');
 		if($this->goody = false){
+			$this->goody = 0;
 			uploadImage('images', '../images/content/');
 		}else{
 			uploadImage('images', '../images/content/goodies');
+			$this->goody = 1;
 		}
 		
 		//Insert Work	

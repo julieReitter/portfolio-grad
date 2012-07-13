@@ -20,7 +20,6 @@ var work = function(id){
 	
 	var populateWorkDetails = function(workObj){
 		var $fullDetailsSection = $("#full-details"),
-			height = $("#gallery").height();
 			images = '',
 			skillsList = '',
 			html = '';
@@ -29,11 +28,9 @@ var work = function(id){
 			images += "<li><img src='images/content/" + value + "' alt='" + workObj.name + "'></li>";	
 		});
 		
-		/*
 		$.each(workObj.skills, function(index){
 			skillsList += "<li>" + workObj.skills[index] + "</li>";
 		});
-		*/
 		
 		html += '<div id="gallery">';
 		html += '<ul>';
@@ -42,7 +39,7 @@ var work = function(id){
 		html += '<div id="details">';
 		html += '<h2>' + workObj.name + ' <a href="#" class="fr close">X Close</a></h2>';
 		html += '<p>' + workObj.desc + '</p>';
-		html += "<ul class='item-skills'>" + skillsList + "</ul>";
+		html += "<h3>Skills Used</h3><ul class='item-skills'>" + skillsList + "</ul>";
 		if(workObj.link != ""){
 			html += '<a href="' + workObj.link + '" class="button" target="_blank">Visit Site</a>';	
 		}
@@ -52,20 +49,19 @@ var work = function(id){
 			$fullDetailsSection.html(html).slideDown();
 			$(".close").click(closeFullDetails);
 		}else{
-			$fullDetailsSection.css("min-height" , height);
 			$fullDetailsSection.fadeOut(function(){
 				$fullDetailsSection.html(html).fadeIn();
 				$(".close").click(closeFullDetails);	
 			});
 		}
 		
-		$fullDetailsSection.after("<div class='clearfix'></div>");
+		//$fullDetailsSection.after("<div class='clearfix'></div>");
 	};
 	
 	var closeFullDetails = function(event){
 		var $fullDetailsSection = $("#full-details");
 		event.preventDefault();
-		
+				
 		$fullDetailsSection.slideUp( function(){
 			$fullDetailsSection.empty();
 		});

@@ -196,18 +196,21 @@ input[type="file"]{
    cursor: pointer;   
 
    a{
-    .link-block;  
+     .link-block;
+	  position: relative;
    }
 }
 
 .hover-overlay{
    display: none;
-   background: fade(#f2f2f2, 95%);
+	background: fade(#f2f2f2, 95%);
    position: absolute;
+	bottom:0;
    width: 200px;
-   height: 300px;
+   height: 150px;
    color: @darkGray !important;
-   
+   border-top: solid 1px @white;
+	
 	h2{
       font-weight: bold;
       margin: 10px;
@@ -217,8 +220,8 @@ input[type="file"]{
    
    ul li{
       list-style-image: url(../images/layout/star.png);
-      margin: 10px 0 10px 35px;
-      
+      margin: 5px 0 5px 35px;
+      font-size: 12px;
    }
 }
 
@@ -231,14 +234,17 @@ input[type="file"]{
 	display:none;
 }
 
+/*
 #full-details + .clearfix{
 	margin-bottom: 30px;
 }
+*/
 
 #gallery{
 	.fl;
 	width: 550px;
 	margin-left: 15px;
+	margin-bottom: 30px;
 	
 	img{
 		margin-bottom: 10px;
@@ -254,7 +260,7 @@ input[type="file"]{
 	width: 375px;
 	margin-left:15px;
 	
-	h2{
+	h2, h3{
 		font-weight: bold;
 	}
 	
@@ -266,6 +272,16 @@ input[type="file"]{
 	.button{
 		padding: 5px 30px;
 		margin-left: 0 !important;
+		clear: both;
+	}
+	
+	ul{
+		margin-bottom: 20px;
+	
+		li{
+			list-style-image: url(../images/layout/star.png);
+			margin: 10px 0 10px 20px;
+		}
 	}
 }
 

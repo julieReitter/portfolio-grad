@@ -21,6 +21,8 @@
 		
 	<div id="loader-section">
 		<div id="full-details"></div>
+		<div class="clearfix"></div>
+		<div id="thumbnails"></div>
 	</div>
 	
 </section><!--close content-->	
