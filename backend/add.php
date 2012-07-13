@@ -36,18 +36,18 @@
 		if(!$valid){
 			$error = "There was an error processing the form. Make sure all required fields are filled";
 		}else{
-			$work -> create();
+			$work -> create();		
 			header("Location: overview.php");
 		}
 	}
-   
-   if(isset($_GET['edit'])){
+	
+	if(isset($_GET['edit'])){
       $id = $_GET['edit'];
       
       $queryWork = "SELECT * FROM work WHERE work_id = '$id'";
       $result = mysql_query($queryWork);
       $rowCount = mysql_num_rows($result);
-
+      
       if($rowCount == 1){
          $w = mysql_fetch_assoc($result);
          
