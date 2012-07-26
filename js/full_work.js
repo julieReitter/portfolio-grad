@@ -5,10 +5,11 @@
 This file loads the full details about
 the selected work.
 **************************************/
+var minHeight;
 
 var work = function(id){
-	var workDetails;
-	var skillsList;
+	var workDetails,
+		 skillsList;
 	
 	var getDetailsFromWork = function(){
 		$.getJSON ("js/works.json", id, function(json){
@@ -46,11 +47,19 @@ var work = function(id){
 		html += '</div>';
 		
 		if($fullDetailsSection.html() == ''){
-			$fullDetailsSection.html(html).slideDown();
+			$fullDetailsSection.html(html).slideDown(function(){
+				minHeight = $("#gallery").height();
+				console.log(minHeight);
+			});
 			$(".close").click(closeFullDetails);
 		}else{
+			console.log(minHeight);
+			$fullDetailsSection.css("min-height", minHeight + "px");
 			$fullDetailsSection.fadeOut(function(){
-				$fullDetailsSection.html(html).fadeIn();
+				$fullDetailsSection.html(html).fadeIn("slow", function(){
+					$fullDetailsSection.css("min-height", "inherit");
+					minHeight = $("#gallery").height();	
+				});
 				$(".close").click(closeFullDetails);	
 			});
 		}

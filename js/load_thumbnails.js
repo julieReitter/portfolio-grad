@@ -6,19 +6,28 @@ This file loads the thumbnails from the
 skills selected in the search or 
 featured images if search is empty
 **************************************/
-var j;
+
 $(document).ready(function(){
 	var loadedWork = []; //Array of work objects - from skills.json
 	var currentId; //Index of full work item TODO - incorporate in full_work.js?
 	
 	//Get Featured Work, Any work where skill not featured limit 8
 	function loadFeaturedWork(){
-		var featuredWork = [];
-		$.getJSON('js/skills.json', function(json, skill){
-			//Assumes featured work is id - 0;
-			j = json;
+		var featuredWork = [],
+			 workIds = [];
+			 
+		$.getJSON('js/skills.json', function(json){
+			//Assumes featured work is id - 1;
+			$.each(json.Featured, function(id, value){
+				workIds.push(id);
+				featuredWork.push(value);
+			});
 		}).complete(function(){
+			$.map(featuredWork, function(val, i){
+				val.id = workIds[i];
+			});
 			populateThumbnails(featuredWork);
+			loadedWork = featuredWork;
 		});
 	}
 	/***************************************
@@ -160,14 +169,11 @@ $(document).ready(function(){
 			next = loadedWork[currentIndex + 1];
 			work(next.id).loadWorkDetails();
 			currentIndex++;
-			console.log(currentIndex);
 		}
 		if(key == left && (currentIndex > 0)){
 			prev = loadedWork[currentIndex - 1];
 			work(prev.id).loadWorkDetails();
 			currentIndex--;
-			console.log(currentIndex);
-			console.log(loadedWork);
 		}
 	}
 	
@@ -182,5 +188,6 @@ $(document).ready(function(){
 		}
 		return index;
 	}
+
 	
 });

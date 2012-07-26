@@ -21,10 +21,18 @@ h1{
    text-shadow: 0 2px 2px @white;
    line-height: 60px;
    
-   &#tagline{
+   &tagline{
       padding: 10px 25px;
    }
    
+}
+
+.tagline{
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 30px;
+	text-shadow: 0 -2px 1px #fff;
 }
 
 a{
@@ -39,11 +47,14 @@ a{
 }
 
 header{
-   height: 45px;
+   height: 40px;
    background: @blue;
-   background-image: url(../images/layout/bluestar.png);
+   /*background-image: url(../images/layout/bluestar.png);*/
    border-bottom: solid 1px darken(@blue, 20%);
-   outline: @white solid 1px;
+   outline: #f5f5f5 solid 1px;
+	-webkit-box-shadow: 0 10px 75px rgba(3,3,3,.1);
+	-moz-box-shadow: 0 10px 75px rgba(3,3,3,.1);
+	box-shadow: 0 10px 75px rgba(3,3,3,.1);
 
 	.wrapper{
 		.center(960px);
@@ -63,10 +74,10 @@ nav{
       font-weight: bold;
       
       a{
-	 color: @white;
-	 line-height: 43px;
-	 text-shadow: 0 1px 2px darken(@blue, 20%);
-	 font-size: 18px;
+		  color: @white;
+		  line-height: 38px;
+		  text-shadow: 0 1px 2px darken(@blue, 20%);
+		  font-size: 18px;
       }
    }
 }
@@ -191,7 +202,7 @@ input[type="file"]{
    height: 300px;
    padding: 10px;
    background: @white;
-   border: solid 1px @lightGray;
+   /*border: solid 1px @lightGray;*/
    margin: 0 15px 30px 15px;
    cursor: pointer;   
 

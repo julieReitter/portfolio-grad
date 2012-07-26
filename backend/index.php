@@ -23,7 +23,7 @@
 		}		
 	}
 	
-	include('../header.php');
+	//	include('../header.php');
 ?>
 	<section id="content" class="login">
 		<form id="login" action="index.php" method="post">

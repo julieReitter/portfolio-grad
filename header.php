@@ -1,5 +1,15 @@
-<?php define('ROOT', 'http://localhost/portfolio'); ?>
-<!DOCTYPE HTML>
+<?php
+	session_start();
+	
+	define('ROOT', 'http://localhost/portfolio');
+	//define('ROOT', 'http://www.juliereitter.com/portfoliograd');
+	if(!isset($_SESSION['user'])){
+		header("Location:" . ROOT . "/backend/index.php");
+	}
+	$user = $_SESSION['user'];
+?>
+
+<!DOCTYPE HTML>	
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">

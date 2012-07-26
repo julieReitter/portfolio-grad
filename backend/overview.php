@@ -1,14 +1,15 @@
 <?php
  	require_once("../resources/connection.php");
 	require_once("../resources/objects.php");
-	
+		/*
 	session_start();
+
 	if(!isset($_SESSION['user'])){
 		header("Location: index.php");
 	}
 	
 	$user = $_SESSION['user'];
-	
+	*/
 	$workQuery = "SELECT * FROM work WHERE goody = 0 ORDER BY name DESC";
 	$retrieveWork = mysql_query($workQuery);
 	
@@ -64,9 +65,17 @@
 		</table>
 		<input type="submit" value="Update Order" class="fr"/>
 		</form>
+		<div class="clearfix"></div>
+
+		<?php include("company.php"); ?>
+		
+		<div class="clearfix"></div>
+		<a href="format_json.php" class="button">Format All Json</a>
 	</section>
 	
 	<script type="text/javascript">
+		$("#skills").chosen();
+		
 		$(".delete").on("click", function(event){
 			return confirm("Are you Sure You Want to Delete This Work");
 		});

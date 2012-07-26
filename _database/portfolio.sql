@@ -32,3 +32,37 @@ work_id INT REFERENCES work(work_id)
 );
 
 
+CREATE TABLE companies (
+company_id INT PRIMARY KEY AUTO_INCREMENT,
+company_name VARCHAR(30) NOT NULL,
+skill_id INT NOT NULL REFERENCES skills(skill_id)
+)
+
+
+/******************************
+JSON Formats
+*******************************/
+
+Skills:
+
+"Skill Title" : {
+	"Work Id" : {
+		"order" : "",
+		"name" : "",
+		"thumbnail" : "",
+		"skills" : {
+			"skill title 1",
+			"skill title 2"
+		}
+	}
+}
+
+"Work ID" : {
+	"name" : "",
+	"desc" : "",
+	"images" : "",
+	"skills" : {
+		"skill title", ..
+	}
+	"link" : ""
+}
