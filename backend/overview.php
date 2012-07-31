@@ -67,7 +67,7 @@
 		</form>
 		<div class="clearfix"></div>
 
-		<?php include("company.php"); ?>
+		<?php //include("company.php"); ?>
 		
 		<div class="clearfix"></div>
 		<a href="format_json.php" class="button">Format All Json</a>

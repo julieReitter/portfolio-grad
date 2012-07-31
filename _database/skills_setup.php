@@ -5,19 +5,20 @@ require_once("../resources/connection.php");
 
 $skills = array(
 	"Featured",
-	"HTML",
-	"HTML5",
-	"CSS",
-	"CSS3",
-	"PHP",
-	"MySQL",
-	"PhotoShop",
-	"Illustrator",
+	"HTML & CSS",
+	"HTML5 & CSS3",
 	"Javascript/Jquery",
 	"jQuery Mobile",
 	"Wordpress Theme Development",
+	"UI / UX Design",
+	"Responsive Design",
+	"PhotoShop",
+	"Illustrator",
+	"PHP",
+	"MySQL",
 	"Python",
-	"Flash/ActionScript"
+	"Flash/ActionScript",
+	"Git"
 );
 
 $clear = "TRUNCATE TABLE skills";
