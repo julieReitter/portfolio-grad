@@ -23,7 +23,8 @@ var work = function(id){
 		var $fullDetailsSection = $("#full-details"),
 			images = '',
 			skillsList = '',
-			html = '';
+			html = '',
+			emptyDetails;
 			
 		$.each(workObj.images, function(key, value){
 			images += "<li><img src='images/content/" + value + "' alt='" + workObj.name + "'></li>";	
@@ -46,24 +47,51 @@ var work = function(id){
 		}
 		html += '</div>';
 		
-		if($fullDetailsSection.html() == ''){
-			$fullDetailsSection.html(html).slideDown(function(){
-				minHeight = $("#gallery").height();
-				console.log(minHeight);
-			});
-			$(".close").click(closeFullDetails);
-		}else{
-			console.log(minHeight);
-			$fullDetailsSection.css("min-height", minHeight + "px");
-			$fullDetailsSection.fadeOut(function(){
-				$fullDetailsSection.html(html).fadeIn("slow", function(){
-					$fullDetailsSection.css("min-height", "inherit");
-					minHeight = $("#gallery").height();	
+		
+		if ($fullDetailsSection.html() == '') {
+			$("#" + id + " .hover-overlay").show();
+			$fullDetailsSection.html(html).find("img").imagesLoaded(function(){
+				$fullDetailsSection.slideDown(function(){
+					// TODO: Remove thumbnail preloader
+					$(".thumbnail .hover-overlay").removeClass("blue-loader").hide();
 				});
-				$(".close").click(closeFullDetails);	
+				$(".close").click(closeFullDetails);
+			});
+		} else {
+			$fullDetailsSection.fadeOut(function(){
+				$fullDetailsSection.html(html).find("img").hide();
+				$("#gallery").addClass("gray-loader");
+				$fullDetailsSection.fadeIn("slow", function(){
+					var $this = $(this);
+					$this.find("img").imagesLoaded(function(){
+						$("#gallery").removeClass("gray-loader");
+						$this.find("img").fadeIn();
+					});
+				});
+				$(".close").click(closeFullDetails); 	
 			});
 		}
 		
+		/*
+		$fullDetailsSection.html(html).ready(function(){
+			console.log("Full Deatils Ready");
+			if($fullDetailsSection.html() == ''){
+				$fullDetailsSection.slideDown(function(){
+					minHeight = $("#gallery").height();
+				});
+				$(".close").click(closeFullDetails);
+			}else{
+				$fullDetailsSection.fadeOut(function(){
+					$fullDetailsSection.html(html).fadeIn("slow", function(){
+						$fullDetailsSection.css("min-height", "inherit");
+						minHeight = $("#gallery").height();	
+					});
+					$(".close").click(closeFullDetails);	
+				});
+			}
+		});
+		*/
+
 		//$fullDetailsSection.after("<div class='clearfix'></div>");
 	};
 	

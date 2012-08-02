@@ -97,10 +97,14 @@ $(document).ready(function(){
 		workHtml += " <div class='clearfix'></div>";
 		
 		//Remove all thumbnails that aren't relevant
-		$loadSection.children().fadeOut().empty();
+		$loadSection.fadeOut("slow", function() {
+			$loadSection.children().empty();
+			//Load Contents into container
+			$loadSection.html(workHtml).fadeIn();
+			//Bind hover to thumbnails 
+			$loadSection.find(".thumbnail a").hover(skillsHoverOverlay, hideOverlay).on("click", getWork);
+		});
 		
-		//Load Contents into container
-		$loadSection.html(workHtml).fadeIn();
 			
 		//Bind hover to thumbnails 
 		$loadSection.find(".thumbnail a").hover(skillsHoverOverlay, hideOverlay).on("click", getWork);
@@ -118,13 +122,13 @@ $(document).ready(function(){
 		var $this = $(this),
 			$overlay = $this.find(".hover-overlay");
 			
-		$overlay.slideDown("fast");
+		$overlay.fadeIn(300);
 		$overlay.bind("mouseout", hideOverlay);
 	}	
 	
 	function hideOverlay(event){
 		var $this = $(this);
-		$this.find(".hover-overlay").slideUp("fast");	
+		$this.find(".hover-overlay").fadeOut(300);	
 	}
 	
 	function getWork(event){
@@ -133,6 +137,9 @@ $(document).ready(function(){
 			id = $this.attr("id");
 		
 		event.preventDefault();
+		
+		//PRELOADER
+		$this.find(".hover-overlay").addClass("blue-loader");
 		
 		work(id).loadWorkDetails();
 		currentIndex = getIndexById(loadedWork, id);

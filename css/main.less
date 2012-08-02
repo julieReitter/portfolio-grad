@@ -95,7 +95,7 @@ nav{
 }
 
 #content{
-   .center(960px);
+   .center(1024px);
    clear: both;
    margin-top: 50px;
 }
@@ -214,12 +214,12 @@ input[type="file"]{
 
 .hover-overlay{
    display: none;
-	background: fade(#f2f2f2, 95%);
+	background: fade(#f2f2f2, 95%);//fade(#515050, 85%);
    position: absolute;
 	bottom:0;
    width: 200px;
-   height: 150px;
-   color: @darkGray !important;
+   height: 300px;
+   color: @darkGray;
    border-top: solid 1px @white;
 
 	h2{
@@ -231,8 +231,7 @@ input[type="file"]{
    
    ul li{
       list-style-image: url(../images/layout/star.png);
-      margin: 5px 0 5px 35px;
-      font-size: 12px;
+      margin: 5px 0 10px 35px;
    }
 }
 
@@ -254,9 +253,12 @@ input[type="file"]{
 #gallery{
 	.fl;
 	width: 550px;
+	min-height: 450px;
 	margin-left: 15px;
 	margin-bottom: 30px;
-
+	background-repeat: no-repeat;
+	background-position: center;
+	
 	img{
 		margin-bottom: 10px;
 		padding: 10px;
@@ -268,7 +270,7 @@ input[type="file"]{
 
 #details{
 	.fr;
-	width: 375px;
+	width: 425px;
 	margin-left:15px;
 
 	h2, h3{
@@ -338,4 +340,14 @@ input[type="file"]{
 		margin-bottom: 20px;
 	}
 
+}
+
+.gray-loader {
+	background-image: url('../images/layout/preloader.gif');
+}
+
+.blue-loader {
+	background-image: url('../images/layout/preloader_blue.gif');
+	background-repeat: no-repeat;
+	background-position: center 250px;
 }

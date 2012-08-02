@@ -66,7 +66,7 @@ class Work{
 		
 		//Upload Images
 		uploadImage('thumbnail', '../images/content/thumbnails/');
-		if($this->goody = false){
+		if($this->goody == false){
 			$this->goody = 0;
 			uploadImage('images', '../images/content/');
 		}else{

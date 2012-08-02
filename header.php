@@ -23,6 +23,7 @@
 <script src="<?php echo ROOT . "/resources/lib/jquery-1.7.2.min.js";?>" type="text/javascript"></script>
 <script src="<?php echo ROOT . "/resources/lib/less-1.3.0.min.js";?>" type="text/javascript"></script>
 <script src="<?php echo ROOT . "/resources/lib/chosen.jquery.min.js";?>" type="text/javascript"></script>
+<script src="<?php echo ROOT . "/resources/lib/imagesloaded.js";?>" type="text/javascript"></script>
 <!-- My Scripts -->
 <script src="<?php echo ROOT . "/js/load_thumbnails.js";?>" type="text/javascript"></script>
 <script src="<?php echo ROOT . "/js/full_work.js";?>" type="text/javascript"></script>
