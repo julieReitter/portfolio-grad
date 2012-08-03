@@ -5,7 +5,7 @@
 	$retrieveGoodies = mysql_query($goodyQuery);
 ?>
 
-<section id="content">
+<section id="content" class="goodies-content">
 	<?php while($row = mysql_fetch_assoc($retrieveGoodies)): ?>
 		<div class="goody">
 			<a href="<?php $row['link']; ?>" class="image-link">

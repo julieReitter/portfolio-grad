@@ -107,7 +107,7 @@ $(document).ready(function(){
 		
 			
 		//Bind hover to thumbnails 
-		$loadSection.find(".thumbnail a").hover(skillsHoverOverlay, hideOverlay).on("click", getWork);
+		//$loadSection.find(".thumbnail a").hover(skillsHoverOverlay, hideOverlay).on("click", getWork);
 	}
 	
 	//Onload triggers
@@ -122,13 +122,13 @@ $(document).ready(function(){
 		var $this = $(this),
 			$overlay = $this.find(".hover-overlay");
 			
-		$overlay.fadeIn(300);
+		$overlay.fadeIn(300, "swing");
 		$overlay.bind("mouseout", hideOverlay);
 	}	
 	
 	function hideOverlay(event){
 		var $this = $(this);
-		$this.find(".hover-overlay").fadeOut(300);	
+		$this.find(".hover-overlay").fadeOut(300, "swing");	
 	}
 	
 	function getWork(event){
@@ -196,5 +196,21 @@ $(document).ready(function(){
 		return index;
 	}
 
+	$('[placeholder]').focus(function() {
+	var input = $(this);
+	if (input.val() == input.attr('placeholder')) {
+	  input.val('');
+	  input.removeClass('placeholder');
+	}
+	}).blur(function() {
+	  var input = $(this);
+	  if (input.val() == '' || input.val() == input.attr('placeholder')) {
+		 input.addClass('placeholder');
+		 input.val(input.attr('placeholder'));
+	  }
+	}).blur();
+	
+	
+	
 	
 });

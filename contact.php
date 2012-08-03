@@ -41,14 +41,7 @@ include('header.php');
 		<input type="text" name="email" id="email" placeholder="Your Email*"  value ="<?php if(isset($postback['email'])) echo $postback['email'];?>" required="required"/>
 		<span class="error"><?php if(isset($errors['email'])) echo $errors['email'];?></span>
 		<input type="text" name="website" id="website" placeholder="You Website" value ="<?php if(isset($postback['website'])) echo $postback['website'];?>"/>
-		<textarea name="message" id="message" required="required">
-			<?php 
-			if(isset($postback['message'])) 
-				echo $postback['message'];
-			else
-				echo "Your Message*";
-			?>
-		</textarea>
+		<textarea name="message" id="message" required="required"><?php if(isset($postback['message'])) echo $postback['message']; else echo "Your Message*";?></textarea>
 		<span class="error"><?php if(isset($errors['message'])) echo $errors['message'];?></span>
 		<input type="submit" value="Send"/>
 	</form>

@@ -3,8 +3,10 @@
 
 <section id="content">
 	
-	<h1 class="tagline" style="display:none">web design and development that combines
-		<br/><span class="fr"> the logical with the beautiful</span></h1>
+	<h1 class="tagline">Hello, I'm Julie and I'm a web designer and front-end developer.
+		<br/> I love clean code as much as I love clean design 
+		<!--<br/><span class="fr"> the logical with the beautiful</span>-->
+	</h1>
 	<div class="clearfix"></div>
 	<select id="skills-select" multiple data-placeholder="Search a skill to view related work" style="width:550px;">
 	<?php

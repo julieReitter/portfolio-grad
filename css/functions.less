@@ -33,18 +33,18 @@ LESS FUNCTIONS
 
 .gradient(@color: @blue){
 	background: @color;
-	background: -webkit-linear-gradient(top, lighten(@color, 10%) 0%, darken(@color, 10%) 100%);
-	background: -moz-linear-gradient(top, lighten(@color, 10%) 0%, darken(@color, 10%) 100%);
-	background: -o-linear-gradient(top, lighten(@color, 10%) 0%, darken(@color, 10%) 100%);
-	background: -linear-gradient(top, lighten(@color, 10%) 0%, darken(@color, 10%) 100%);
+	background: -webkit-linear-gradient(top, lighten(@color, 5%) 0%, darken(@color, 10%) 100%);
+	background: -moz-linear-gradient(top, lighten(@color, 5%) 0%, darken(@color, 10%) 100%);
+	background: -o-linear-gradient(top, lighten(@color, 5%) 0%, darken(@color, 10%) 100%);
+	background: -linear-gradient(top, lighten(@color, 5%) 0%, darken(@color, 10%) 100%);
 }
 
 .reverse-gradient(@color: @blue){
 	background: darken(@color, 15%);
-	background: -webkit-linear-gradient(top, darken(@color, 10%) 0%, lighten(@color, 10%) 100%);
-	background: -moz-linear-gradient(top, darkent(@color, 10%) 0%, lighten(@color, 10%) 100%);
-	background: -o-linear-gradient(top, darken(@color, 10%) 0%, lighten(@color, 10%) 100%);
-	background: -linear-gradient(top, darken(@color, 10%) 0%, lighten(@color, 10%) 100%);		  
+	background: -webkit-linear-gradient(top, darken(@color, 10%) 0%, lighten(@color, 5%) 100%);
+	background: -moz-linear-gradient(top, darkent(@color, 10%) 0%, lighten(@color, 5%) 100%);
+	background: -o-linear-gradient(top, darken(@color, 10%) 0%, lighten(@color, 5%) 100%);
+	background: -linear-gradient(top, darken(@color, 10%) 0%, lighten(@color, 5%) 100%);		  
 }
 
 .work (@width: 200px){
@@ -57,9 +57,9 @@ LESS FUNCTIONS
 .user-input{
 	padding: 12px;
 	border: solid 1px @lightGray;
-	-webkit-box-shadow: inset 1px 2px 5px lighten(@lightGray, 3%), 1px 1px 2px @white;
-	-moz-box-shadow: inset 1px 2px 5px lighten(@lightGray, 3%), 1px 1px 2px @white;
-	box-shadow: inset 1px 2px 5px lighten(@lightGray, 3%), 1px 1px 2px @white;
+	-webkit-box-shadow: inset 0 1px 10px lighten(@lightGray, 4%), 1px 1px 2px @white;
+	-moz-box-shadow: inset 0 1px 10px lighten(@lightGray, 4%), 1px 1px 2px @white;
+	box-shadow: inset 0 1px 10px lighten(@lightGray, 4%), 1px 1px 2px @white;
 }
 
 .fl{

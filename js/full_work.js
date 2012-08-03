@@ -39,7 +39,7 @@ var work = function(id){
 		html += images;
 		html += '</ul></div>';
 		html += '<div id="details">';
-		html += '<h2>' + workObj.name + ' <a href="#" class="fr close">X Close</a></h2>';
+		html += '<h2>' + workObj.name + ' <a href="#" class="fr close">X</a></h2>';
 		html += '<p>' + workObj.desc + '</p>';
 		html += "<h3>Skills Used</h3><ul class='item-skills'>" + skillsList + "</ul>";
 		if(workObj.link != ""){
@@ -47,12 +47,10 @@ var work = function(id){
 		}
 		html += '</div>';
 		
-		
 		if ($fullDetailsSection.html() == '') {
 			$("#" + id + " .hover-overlay").show();
 			$fullDetailsSection.html(html).find("img").imagesLoaded(function(){
 				$fullDetailsSection.slideDown(function(){
-					// TODO: Remove thumbnail preloader
 					$(".thumbnail .hover-overlay").removeClass("blue-loader").hide();
 				});
 				$(".close").click(closeFullDetails);
@@ -65,33 +63,13 @@ var work = function(id){
 					var $this = $(this);
 					$this.find("img").imagesLoaded(function(){
 						$("#gallery").removeClass("gray-loader");
-						$this.find("img").fadeIn();
+						$this.find("img").fadeIn("slow");
 					});
 				});
 				$(".close").click(closeFullDetails); 	
 			});
 		}
 		
-		/*
-		$fullDetailsSection.html(html).ready(function(){
-			console.log("Full Deatils Ready");
-			if($fullDetailsSection.html() == ''){
-				$fullDetailsSection.slideDown(function(){
-					minHeight = $("#gallery").height();
-				});
-				$(".close").click(closeFullDetails);
-			}else{
-				$fullDetailsSection.fadeOut(function(){
-					$fullDetailsSection.html(html).fadeIn("slow", function(){
-						$fullDetailsSection.css("min-height", "inherit");
-						minHeight = $("#gallery").height();	
-					});
-					$(".close").click(closeFullDetails);	
-				});
-			}
-		});
-		*/
-
 		//$fullDetailsSection.after("<div class='clearfix'></div>");
 	};
 	
@@ -100,7 +78,7 @@ var work = function(id){
 		event.preventDefault();
 				
 		$fullDetailsSection.slideUp( function(){
-			$fullDetailsSection.empty();
+			$fullDetailsSection.html('');
 		});
 	};
 	
@@ -108,5 +86,6 @@ var work = function(id){
 		loadWorkDetails : function(){
 			getDetailsFromWork(id);
 		}
-	}
+	};
+	
 };
