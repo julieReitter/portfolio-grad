@@ -89,7 +89,7 @@ $(document).ready(function(){
 			html += "<ul>" + skillsList + "</ul>";
 			html += '</span>';
 			html += "<img src='images/content/thumbnails/" + value.thumbnail + "' alt='" + value.name + "'/>";
-			html += '<a/></div>';
+			html += '</a></div>';
 			
 			workHtml += html;
 		});
@@ -210,7 +210,5 @@ $(document).ready(function(){
 	  }
 	}).blur();
 	
-	
-	
-	
+
 });

@@ -26,7 +26,7 @@
 		<div class="clearfix"></div>
 		<div id="thumbnails"></div>
 	</div>
-	
+	<div class="push"></div>
 </section><!--close content-->	
 
 <?php include('footer.php'); ?>

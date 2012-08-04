@@ -46,3 +46,11 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+
+
+/* HTML5 Support for IE */
+
+header, nav, section, article, aside, footer {
+   display:block;
+}

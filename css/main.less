@@ -1,6 +1,21 @@
 @import url("reset.css");
 @import url("functions.less");
 
+html, body {
+	height: 100%;
+}
+
+#content {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -40px;
+}
+
+footer, .push {
+	height: 40px;
+}
+
 body{
    background: @lightGray;
    background-image: url(../images/layout/stripebg.png);
@@ -384,6 +399,69 @@ input[type="file"]{
 
 }
 
+#content.about {
+	.center(800px);
+}
+
+.about {
+	h2{
+		font-size: 22px;
+		font-weight: bold;
+		margin-bottom: 10px;
+		text-transform: lowercase;
+	}
+	
+	.right {
+		.fl;
+		width: 300px;
+		margin-top: 30px;
+	
+		a	{
+			font-weight: bold;
+			}
+	
+	}
+	
+	.button {
+		width: 269px !important;
+		display: block;
+		margin: 0;
+		.inset-padding;
+	}
+	
+	img {
+		.shadow;
+		display: block;
+		padding: 5px;
+		background: @white;
+		margin-bottom: 20px;
+	}
+}
+
+
+.about-me-content {
+	.fr;
+	width: 500px;
+	line-height: 22px;
+	text-align: justify;
+	
+
+	
+	.section {
+		margin-top: 30px; 
+	}
+	
+}
+
+
+footer {
+	background: darken(@darkGray, 5%);
+	border-top: solid 1px #333;
+	color: #ccc;
+	font-size: 12px;
+}
+
+
 .gray-loader {
 	background-image: url('../images/layout/preloader.gif');
 }
@@ -423,10 +501,5 @@ input[type="file"]{
 
 @-webkit-keyframes navhover {
    from {position: relative; top: 0;}
-	top  {position: relative; top: -3px;}
+	top  {position: relative; top: -5px;}
 }
-
-
-
-
-

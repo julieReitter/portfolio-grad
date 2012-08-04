@@ -51,6 +51,7 @@ include('header.php');
 		<p>Fill out the form to the left <br/>or call 973.615.3429.</p>
 		<p>I'm currently avaiable <br/>for work.</p>	
 	</aside>
+<div class="push"></div>
 </section>
 <?php 
 }else{
@@ -59,6 +60,7 @@ include('header.php');
 	<h1>Thank you for contacting me</h1>
 	<h3>I will respond to your message as soon as possible</h3>
 	<p>Social Media Links</p>
+<div class="push"></div>
 </section>
 <?php	
 }//close sent check

@@ -1,33 +1,47 @@
 <?php include('header.php'); ?>
 
-<section id="content">
-	<img src="../html structure/me" class="fl"/>
-	<article>
-		<p>My Introduction</p>
-		
-		<h2>Why Hire Me</h2>
-		<ul id="hire-me">
-			<li>
-				<h3>Perfection</h3>
-				<p>I take pride in my work and will not complete a job until every design or code flaw is corrected.</p>
-			</li>
-			<li>
-				<h3>Creativity</h3>
-				<p>I design memorable web pages that are effective and easy to use.</p>
-			</li>
-			<li>
-				<h3>Productivity</h3>
-				<p>I love working, but not all the time. I always find the most efficient way to complete work.</p>
-			</li>
-		</ul>
-		
-		<table id="skills">
-			<tr>
-				<td>Name</td>
-				<td>Stars</td>
-			</tr>
-		</table>
+<section id="content" class="about">
+	<div class="right">
+      <img src="images/layout/me.jpg"/>
+      <a href="work/JulieReitter_Resume.pdf" class="button" target="_blank">My Resume</a>
+      <!--
+      <h2>Inspiring Links</h2>
+        <ul>
+           <li><a href="http://udacity.com">Udacity.com</a></li>
+           <li><a href="http://vandelaydesign.com/blog/">Vandelay Design Blog</a></li>
+           <li><a href="http://csswizardry.com/.com">CSS Wizardry</a></li>
+           <li><a href="http://css-tricks.com/">CSS Tricks</a></li>
+           <li><a href="http://cssdeck.com/">CSS Deck</a></li>
+        </ul>
+      -->
+   </div>
+   
+   <article class="about-me-content">
+      <div class="quote section">
+         <h2>A Bit About Me</h2>
+         I am a web designer and developer focused on creating
+         beautiful and functioning websites. I made my first website at
+         the young age of eleven and have since developed my skills to
+         meet the industry's current demands. I am passionate about my
+         work and constantly strive to improve my skills.
+      </div>
+      
+      <div class="bio section">
+         <h2>Bio</h2>
+         I graduated from The New England Institute of Art with a
+         Bachelors of Science in Web Design and Interactive Media.
+         I currently live in Boston, MA. My work and play is web
+         design and development. I'm always pushing myself to improve
+         and I'm rarely satisfied. 
+      </div>
 	</article>
+   <div class="clearfix"></div>
+   <div class="section"><br/><br/>
+      <img src="images/layout/artistic_resume.jpg" />
+   </div>
+      
+   
+   <div class="push"></div>
 </section>
 
 <?php include('footer.php'); ?>
