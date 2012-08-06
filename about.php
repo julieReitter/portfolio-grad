@@ -37,7 +37,7 @@
 	</article>
    <div class="clearfix"></div>
    <div class="section"><br/><br/>
-      <img src="images/layout/artistic_resume.jpg" />
+      <!--<img src="images/layout/artistic_resume.jpg" />-->
    </div>
       
    

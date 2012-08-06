@@ -45,6 +45,8 @@ var work = function(id){
 		if(workObj.link != ""){
 			html += '<a href="' + workObj.link + '" class="button" target="_blank">Visit Site</a>';	
 		}
+      html += '<span class="key">Press <img src="images/layout/key_arrows.png" alt="Left and Right" /> to navigate</span>';
+      
 		html += '</div>';
 		
 		if ($fullDetailsSection.html() == '') {

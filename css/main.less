@@ -67,11 +67,13 @@ header{
    background: @blue;
    /*background-image: url(../images/layout/bluestar.png);*/
    border-bottom: solid 1px darken(@blue, 20%);
-   outline: #f5f5f5 solid 1px;
-	-webkit-box-shadow: 0 10px 75px rgba(3,3,3,.1);
-	-moz-box-shadow: 0 10px 75px rgba(3,3,3,.1);
-	box-shadow: 0 10px 75px rgba(3,3,3,.1);
-
+   //outline: #f5f5f5 solid 1px;
+	-webkit-box-shadow: 0 10px 75px rgba(3,3,3,.1),
+							  0 1px 0 @white;
+	-moz-box-shadow:  0 10px 75px rgba(3,3,3,.1),
+							0 1px 0 @white;
+	box-shadow:  0 10px 75px rgba(3,3,3,.1),
+				    0 1px 0 @white;
 	.wrapper{
 		.center(960px);
 	}
@@ -90,6 +92,7 @@ nav{
       font-weight: bold;
       
       a{
+		  .link-block;
 		  color: @white;
 		  line-height: 38px;
 		  text-shadow: 0 1px 2px darken(@blue, 20%);
@@ -102,7 +105,8 @@ nav{
       }
 		
 		a:hover {
-		  top: -5px;
+		  top: -3px;
+		  margin-bottom: 5px;
 		}
    }
 }
@@ -327,6 +331,10 @@ input[type="file"]{
 		margin-left: 0 !important;
 		clear: both;
 	}
+	
+	.key {
+		.fr;
+	}
 
 	ul{
 		margin-bottom: 50px;
@@ -344,6 +352,8 @@ input[type="file"]{
 		width: 25px;
 		height: 25px;
 		text-align: center;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
 		box-sizing: border-box;
 		padding-top: 4px;
 		font-size: 14px;

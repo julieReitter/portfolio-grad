@@ -10,7 +10,7 @@
 	<div class="clearfix"></div>
 	<select id="skills-select" multiple data-placeholder="Search a skill to view related work" style="width:550px;">
 	<?php
-		$querySkills = "SELECT * FROM skills WHERE skill_title <> 'featured'";
+		$querySkills = "SELECT * FROM skills WHERE skill_title <> 'featured' AND skill_title <> 'python' AND skill_title <> 'mysql' ";
 		$skillsResult = mysql_query($querySkills);
 		
 		while($row = mysql_fetch_array($skillsResult)){

@@ -10,10 +10,10 @@
 	
 	$user = $_SESSION['user'];
 	*/
-	$workQuery = "SELECT * FROM work WHERE goody = 0 ORDER BY name DESC";
+	$workQuery = "SELECT * FROM work WHERE goody = 0 ORDER BY order_value ASC";
 	$retrieveWork = mysql_query($workQuery);
 	
-	$queryGoodies = "SELECT * FROM work WHERE goody = 1 ORDER BY name DESC";
+	$queryGoodies = "SELECT * FROM work WHERE goody = 1 ORDER BY order_value ASC";
 	$retrieveGoodies = mysql_query($queryGoodies);
 	
 	include('../header.php');

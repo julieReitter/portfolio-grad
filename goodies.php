@@ -8,7 +8,7 @@
 <section id="content" class="goodies-content">
 	<?php while($row = mysql_fetch_assoc($retrieveGoodies)): ?>
 		<div class="goody">
-			<a href="<?php $row['link']; ?>" class="image-link">
+			<a href="<?php echo $row['link']; ?>" class="image-link">
 			<div class="download-overlay">Download Zip</div>
 			<img src="images/content/<?php echo $row['thumbnail'];?>" alt="<?php $row['name'];?>"  />
 			</a>
