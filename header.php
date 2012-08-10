@@ -1,12 +1,6 @@
 <?php
-	session_start();
-	
-	define('ROOT', 'http://localhost/portfolio');
-	//define('ROOT', 'http://www.juliereitter.com/portfoliograd');
-	if(!isset($_SESSION['user'])){
-		header("Location:" . ROOT . "/backend/index.php");
-	}
-	$user = $_SESSION['user'];
+	//define('ROOT', 'http://localhost/portfolio');
+	define('ROOT', 'http://www.juliereitter.com/portfoliograd');
 ?>
 
 <!DOCTYPE HTML>	
@@ -45,4 +39,9 @@
 				</ul>
 			</nav>
 		</div>
+      <ul id="social-media">
+         <li><a href="http://twitter.com/julie_reitter" class="twitter" target="_blank"></a></li>
+         <li><a href="http://www.linkedin.com/pub/julie-reitter/30/48b/757" class="linkedin" target="_blank"></a></li>
+         <li><a href="http://www.youtube.com/user/Jules125w/videos" class="youtube" target="_blank"></a></li>
+      </ul>
 	</header>

@@ -1,5 +1,13 @@
 <?php
 	include("../resources/connection.php");
+ 	
+   session_start();
+	if(!isset($_SESSION['user'])){
+		header("Location: index.php");
+	}
+	
+	$user = $_SESSION['user'];
+
 
 	$getAllSkills = "SELECT s.skill_id AS 'sId', s.skill_title, w.*, ws.* FROM skills s, work_skills ws, work w
 						WHERE s.skill_id = ws.skill_id

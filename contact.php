@@ -55,11 +55,12 @@ include('header.php');
 </section>
 <?php 
 }else{
+include('header.php');
 ?>
+
 <section id="content">
 	<h1>Thank you for contacting me</h1>
 	<h3>I will respond to your message as soon as possible</h3>
-	<p>Social Media Links</p>
 <div class="push"></div>
 </section>
 <?php	

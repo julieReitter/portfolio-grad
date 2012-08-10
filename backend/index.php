@@ -1,5 +1,5 @@
 <?php
-	require_once('../resources/connection.php');
+	require('../resources/connection.php');
 	$error;
 	
 	if(!empty($_POST['postback'])){
@@ -20,10 +20,10 @@
 			} else {
 				$error = "Your Login Information Was Invalid";	
 			}
-		}		
+		}
 	}
 	
-	//	include('../header.php');
+	include('../header.php');
 ?>
 	<section id="content" class="login">
 		<form id="login" action="index.php" method="post">

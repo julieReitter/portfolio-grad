@@ -3,14 +3,13 @@
 	require_once("../resources/functions.php");
 	require_once("../resources/objects.php");
 	
-	/*
 	session_start();
 	if(!isset($_SESSION['user'])){
 		header("Location: index.php");
 	}
 	
 	$user = $_SESSION['user'];
-	*/
+
 	$time = mktime(0, 0, 0, date("m"),date("d"),date("Y"));
 	$today = date('m/d/Y', $time);
 		

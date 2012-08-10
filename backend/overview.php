@@ -1,7 +1,7 @@
 <?php
  	require_once("../resources/connection.php");
 	require_once("../resources/objects.php");
-		/*
+
 	session_start();
 
 	if(!isset($_SESSION['user'])){
@@ -9,7 +9,7 @@
 	}
 	
 	$user = $_SESSION['user'];
-	*/
+
 	$workQuery = "SELECT * FROM work WHERE goody = 0 ORDER BY order_value ASC";
 	$retrieveWork = mysql_query($workQuery);
 	
